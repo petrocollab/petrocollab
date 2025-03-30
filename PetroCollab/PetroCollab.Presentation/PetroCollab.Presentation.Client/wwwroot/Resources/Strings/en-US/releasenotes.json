@@ -1,0 +1,23 @@
+{
+  "releasenotes": {
+    "title": "Release Notes & Backlog",
+    "currentversion": "Current Version: 0.1.0 (Alpha)",
+    "latestupdates": {
+      "title": "Latest Updates",
+      "items": [
+        "Initial project setup",
+        "Basic navigation structure",
+        "Placeholder pages"
+      ]
+    }
+  },
+  "backlog": {
+    "title": "Upcoming Features (Backlog)",
+    "items": [
+      "PRV sizing calculator implementation",
+      "API 520 standard calculations",
+      "Result visualization",
+      "Export functionality"
+    ]
+  }
+}
