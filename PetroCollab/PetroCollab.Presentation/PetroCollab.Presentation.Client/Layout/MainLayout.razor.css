@@ -2,34 +2,38 @@
     position: relative;
     display: flex;
     background-color: #efefef;
-    padding: 10px;
+    padding: 0px;
+    margin: 10px;
     min-height: 100vh;
+    height: auto;
 }
 
 main {
     flex: 1;
-    padding: 20px;
+    padding: 0px;
     background-color: white;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
+    min-height: 100%;
 }
 
 .content {
     flex: 1;
-    margin: 0 auto;
     width: 100%;
-    max-width: 1200px;
+    max-width: auto;
+    height: auto;
 }
 
 .sidebar {
     top: 0px;
     left: 0px;
     background: #efefef !important;
-    padding: 15px 20px 0px 0px;
+    padding: 0px 20px 0px 0px;
     width: 200px !important;
-    height: 100vh;
+    height: auto;
+    min-height: 100%;
     overflow-y: auto;
     margin-left: 0;
     margin-right: 0px;
