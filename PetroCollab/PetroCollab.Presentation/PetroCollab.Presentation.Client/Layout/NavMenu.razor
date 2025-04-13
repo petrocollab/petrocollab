@@ -16,19 +16,28 @@
 
 <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="flex-column">
+        <!-- Home -->
         <div class="nav-item">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
             </NavLink>
         </div>
+        <!-- About -->
         <div class="nav-item">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
+            <NavLink class="nav-link" href="about" Match="NavLinkMatch.All">
+                <span class="bi bi-info-circle" aria-hidden="true"></span> About
             </NavLink>
         </div>
+        <!-- PRV Calculations -->
         <div class="nav-item">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
+            <NavLink class="nav-link" href="prv-calculator" Match="NavLinkMatch.All">
+                <span class="bi bi-calculator" aria-hidden="true"></span> PRV Calculator
+            </NavLink>
+        </div>
+        <!-- Release Notes -->
+        <div class="nav-item">
+            <NavLink class="nav-link" href="releases" Match="NavLinkMatch.All">
+                <span class="bi bi-file-earmark-medical" aria-hidden="true"></span> Release Notes
             </NavLink>
         </div>
     </nav>
