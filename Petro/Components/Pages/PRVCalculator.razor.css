@@ -1,0 +1,53 @@
+﻿.calculator-page {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+    .calculator-page h3 {
+        margin: 10px;
+        padding: 0;
+    }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 150px 150px;
+    gap: 10px;
+    margin: 10px;
+    box-sizing: border-box;
+    width: calc(100% - 20px);
+}
+
+.grid-item {
+    padding: 15px;
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #ffffcc;
+    overflow: hidden;
+}
+
+    .grid-item:nth-child(1) {
+        border-color: #ff0000;
+    }
+
+    .grid-item:nth-child(2) {
+        border-color: #00ff00;
+    }
+
+    .grid-item:nth-child(3) {
+        border-color: #0000ff;
+    }
+
+    .grid-item:nth-child(4) {
+        border-color: #ff00ff;
+    }
+
+/* Ensure we don't get a horizontal scrollbar by making sure nothing extends beyond viewport */
+:root {
+    overflow-x: hidden;
+}
