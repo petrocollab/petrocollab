@@ -1,10 +1,15 @@
 using Petro.Components;
+using Petro.ViewModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<HomeViewModel>();
+
 
 var app = builder.Build();
 

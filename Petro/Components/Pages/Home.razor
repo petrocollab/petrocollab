@@ -1,7 +1,20 @@
 ﻿@page "/"
+@using Petro.ViewModels
+@inject HomeViewModel HomeViewModel
+
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+<h1>@HomeViewModel.Title</h1>
+<p>@HomeViewModel.Description</p>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await HomeViewModel.LoadDataAsync();
+    }
+}
