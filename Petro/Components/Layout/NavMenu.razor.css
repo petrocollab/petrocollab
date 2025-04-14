@@ -1,37 +1,30 @@
+/* Logo and header styling */
+.sidebar-text {
+    margin-top: 20px;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.logo {
+    margin-bottom: 15px;
+}
+
+.back-home {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: #333;
+}
+
 .navbar-toggler {
-    appearance: none;
-    cursor: pointer;
-    width: 3.5rem;
-    height: 2.5rem;
-    color: white;
-    position: absolute;
-    top: 0.5rem;
-    right: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") no-repeat center/1.75rem rgba(255, 255, 255, 0.1);
+    display: none;
 }
 
-.navbar-toggler:checked {
-    background-color: rgba(255, 255, 255, 0.5);
-}
-
-.top-row {
-    height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
-}
-
-.navbar-brand {
-    font-size: 1.1rem;
-}
-
-.bi {
-    display: inline-block;
-    position: relative;
-    width: 1.25rem;
-    height: 1.25rem;
-    margin-right: 0.75rem;
-    top: -1px;
-    background-size: cover;
+/* Navigation container */
+.nav-scrollable {
+    height: auto;
+    visibility: visible;
+    overflow: visible;
 }
 
 .bi-house-door-fill-nav-menu {
@@ -47,59 +40,78 @@
 }
 
 .nav-item {
-    font-size: 0.9rem;
-    padding-bottom: 0.5rem;
+    padding: 0;
+    margin: 10px 0px 0px 5px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+    position: relative;
 }
-
-    .nav-item:first-of-type {
-        padding-top: 1rem;
+    .nav-item:hover {
+        background: rgb(235, 232, 232);
     }
 
-    .nav-item:last-of-type {
-        padding-bottom: 1rem;
+    /* Active state - applied when the NavLink gets the 'active' class */
+    .nav-item ::deep .active {
+        color: #000;
+        font-weight: 500;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
     }
 
     .nav-item ::deep .nav-link {
-        color: #d7d7d7;
-        background: none;
-        border: none;
-        border-radius: 4px;
-        height: 3rem;
         display: flex;
         align-items: center;
-        line-height: 3rem;
-        width: 100%;
+        padding: 8px 10px;
+        font-size: 13px;
+        color: rgb(143, 143, 143);
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.2s ease;
     }
 
-.nav-item ::deep a.active {
-    background-color: rgba(255,255,255,0.37);
-    color: white;
-}
+        /* Icon styling - ensure visibility */
+        .nav-item ::deep .nav-link span {
+            margin-right: 10px;
+            width: 16px;
+            text-align: center;
+            font-size: 1.1em;
+            display: inline-block;
+            visibility: visible;
+        }
 
-.nav-item ::deep .nav-link:hover {
-    background-color: rgba(255,255,255,0.1);
-    color: white;
-}
+    .nav-item ::deep .bi::before {
+        display: inline-block;
+        content: "";
+        background-repeat: no-repeat;
+        background-size: 1rem 1rem;
+        height: 1rem;
+        width: 1rem;
+    }
 
-.nav-scrollable {
-    display: none;
-}
-
-.navbar-toggler:checked ~ .nav-scrollable {
-    display: block;
-}
-
-@media (min-width: 641px) {
+/* Mobile view adjustments */
+@media (max-width: 771px) {
+    /* Toggle navigation button */
     .navbar-toggler {
-        display: none;
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
     }
+
+        .navbar-toggler:checked ~ .nav-scrollable {
+            display: block;
+        }
 
     .nav-scrollable {
-        /* Never collapse the sidebar for wide screens */
-        display: block;
-
-        /* Allow sidebar to scroll for tall menus */
-        height: calc(100vh - 3.5rem);
-        overflow-y: auto;
+        display: none;
+        position: absolute;
+        width: 100%;
+        top: 60px;
+        left: 0;
+        background: #efefef;
+        z-index: 100;
     }
 }

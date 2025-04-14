@@ -1,15 +1,43 @@
 .page {
     position: relative;
     display: flex;
-    flex-direction: column;
+    background-color: #efefef;
+    padding: 0px;
+    margin: 10px;
+    min-height: 100vh;
+    height: auto;
 }
 
 main {
     flex: 1;
+    padding: 0px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
+    min-height: 100%;
+}
+
+.content {
+    flex: 1;
+    width: 100%;
+    max-width: auto;
+    height: auto;
 }
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    top: 0px;
+    left: 0px;
+    background: #efefef;
+    padding: 0px 20px 0px 0px;
+    width: 200px;
+    height: auto;
+    min-height: 100%;
+    overflow-y: auto;
+    margin-left: 0;
+    margin-right: 0px;
+    position: sticky;
 }
 
 .top-row {
@@ -27,23 +55,23 @@ main {
         text-decoration: none;
     }
 
-    .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
-        text-decoration: underline;
-    }
+        .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
+            text-decoration: underline;
+        }
 
-    .top-row ::deep a:first-child {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+        .top-row ::deep a:first-child {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
 @media (max-width: 640.98px) {
     .top-row {
         justify-content: space-between;
     }
 
-    .top-row ::deep a, .top-row ::deep .btn-link {
-        margin-left: 0;
-    }
+        .top-row ::deep a, .top-row ::deep .btn-link {
+            margin-left: 0;
+        }
 }
 
 @media (min-width: 641px) {
@@ -64,11 +92,11 @@ main {
         z-index: 1;
     }
 
-    .top-row.auth ::deep a:first-child {
-        flex: 1;
-        text-align: right;
-        width: 0;
-    }
+        .top-row.auth ::deep a:first-child {
+            flex: 1;
+            text-align: right;
+            width: 0;
+        }
 
     .top-row, article {
         padding-left: 2rem !important;
