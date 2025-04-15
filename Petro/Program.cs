@@ -1,3 +1,4 @@
+using ApexCharts;
 using Petro.Components;
 using Petro.ViewModels;
 
@@ -9,7 +10,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<HomeViewModel>();
-
+builder.Services.AddApexCharts();
 
 var app = builder.Build();
 

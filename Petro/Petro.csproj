@@ -12,4 +12,8 @@
     <Folder Include="Petro.Application\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Blazor-ApexCharts" Version="5.1.0" />
+  </ItemGroup>
+
 </Project>
