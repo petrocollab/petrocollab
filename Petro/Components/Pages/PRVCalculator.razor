@@ -7,11 +7,7 @@
     <div class="row">
         <div class="col-md-6">
             
-            <div class="formula-container text-center my-4">
-                <div style="font-size: 1.5rem;">
-                    \[A = \frac{Q}{38K_dK_wK_cK_v} \sqrt{\frac{G}{p_1-p_2}}\]
-                </div>
-            </div>
+            
 
             <div class="card">
                 <div class="card-header">Input Parameters</div>
@@ -52,6 +48,9 @@
             </div>
         </div>
 
+        
+        
+
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">Results</div>
@@ -73,22 +72,32 @@
                             <span>Enter values and click Calculate to see results.</span>
                         }
                     </div>
-
-                    <div class="card mt-3">
-                        <div class="card-header">Formula Used</div>
-                        <div class="card-body">
-                            <p><strong>Area required = (Max Pump rate (gpm) / (38 * kw * kd)) * SQRT(MW / (P1 - P2))</strong></p>
-                            <p>Where:</p>
-                            <ul>
-                                <li>MW = Oil Base Mud (sg)</li>
-                                <li>kw = Capacity Correction Factor (B.Pressure)</li>
-                                <li>kd = Coefficient of Discharge</li>
-                                <li>P1 = Over Pressure PRV = PRV setting (Set point) + 10% of PRV setting (Set point)</li>
-                                <li>P2 = Max Hydrostatic Backpressure</li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="formula-container text-center my-4">
+                <div style="font-size: 1.5rem;">
+                    \[A = \frac{Q}{38K_dK_wK_v} \sqrt{\frac{G}{p_1-p_2}}\]
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-header">Formula Used</div>
+            <div class="card-body">
+                <p>Where:</p>
+                <ul>
+                    <li>𝐴: Required discharge area (in²)</li>
+                    <li>𝑄: Flow rate (gpm)</li>
+                    <li>𝐾𝑑: Coefficient of discharge (dimensionless)</li>
+                    <li>𝐾𝑤: Capacity correction factor (dimensionless)</li>
+                    <li>𝐾𝑣: Viscosity correction factor (dimensionless)</li>
+                    <li>𝐺: Specific gravity of the fluid (sg)</li>
+                    <li>𝑃1​: Set pressure plus overpressure (psi)</li>
+                    <li>𝑃2: Backpressure (psi)</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -96,6 +105,9 @@
 </div>
 
 @code {
+    //TODO: Separate Models for calculations and data
+
+
     // Input parameters
     private double MaxPumpRate { get; set; }
     private double MudWeight { get; set; } = 1.20; // Default value
@@ -115,7 +127,35 @@
     {
         if (firstRender)
         {
-            await JSRuntime.InvokeVoidAsync("eval", "if (typeof MathJax !== 'undefined') { MathJax.typeset(); }");
+            // await JSRuntime.InvokeVoidAsync("eval", "if (typeof MathJax !== 'undefined') { MathJax.typeset(); }");
+            await JSRuntime.InvokeVoidAsync("eval", @"
+            if (typeof window.MathJax === 'undefined') {
+                // MathJax config
+                window.MathJax = {
+                    tex: {
+                        inlineMath: [['$', '$']],
+                        displayMath: [['\\\\[', '\\\\]']]
+                    },
+                    svg: {
+                        fontCache: 'global'
+                    }
+                };
+
+                // Load MathJax
+                var script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
+                script.id = 'MathJax-script';
+                script.async = true;
+
+                script.onload = function() {
+                    MathJax.typeset();
+                };
+
+                document.head.appendChild(script);
+            } else {
+                MathJax.typeset();
+            }
+        ");
         }
     }
 
