@@ -2,6 +2,8 @@
 {
     public class PRVCalculationModel
     {
+        //TODO: Redo the model
+        //TODO: Put them in the right folder
         // Input values
         public double FlowRate { get; set; }
         public double MudWeight { get; set; }
