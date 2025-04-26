@@ -1,70 +1,103 @@
 ﻿@page "/prv-calculator"
+@using Petro.ViewModels
 @inject IJSRuntime JSRuntime
 
 
 <div class="calculator-page">
     <h3>PRV Calculator</h3>
-    <div class="row">
-        <div class="col-md-6">
-            
-            
 
+    <div class="top-row">
+        <div class="column">
             <div class="card">
-                <div class="card-header">Input Parameters</div>
+                <h4>Input Parameters</h4>
                 <div class="card-body">
-                    <div class="mb-3">
-                        <label for="maxPumpRate" class="form-label">Max Pump Rate (gpm)</label>
-                        <input type="number" class="form-control" id="maxPumpRate" @bind="MaxPumpRate" />
+                    <div class="mb-4">
+                        <label for="maxPumpRate" class="modern-label">Max Pump Rate (gpm)</label>
+                        <input type="number"
+                               class="modern-input @(ViewModel.MaxPumpRate == 0 ? "default-value" : "")"
+                               id="maxPumpRate"
+                               @bind="ViewModel.MaxPumpRate"
+                               placeholder="0" />
                     </div>
 
-                    <div class="mb-3">
-                        <label for="mudWeight" class="form-label">Oil Base Mud Weight (sg)</label>
-                        <input type="number" class="form-control" id="mudWeight" @bind="MudWeight" step="0.01" />
+                    <div class="mb-4">
+                        <label for="mudWeight" class="modern-label">Mud Weight (sg)</label>
+                        <input type="number"
+                               class="modern-input @(ViewModel.MudWeight == 0 ? "default-value" : "")"
+                               id="mudWeight"
+                               @bind="ViewModel.MudWeight"
+                               placeholder="0" />
                     </div>
 
-                    <div class="mb-3">
-                        <label for="capacityCorrectionFactor" class="form-label">Capacity Correction Factor (kw)</label>
-                        <input type="number" class="form-control" id="capacityCorrectionFactor" @bind="CapacityCorrectionFactor" step="0.01" />
+                    <div class="mb-4">
+                        <label for="capacityCorrectionFactor" class="modern-label">Capacity Correction Factor (Kw)</label>
+                        <input type="number"
+                               class="modern-input @(ViewModel.CapacityCorrectionFactor == 0 ? "default-value" : "")"
+                               id="capacityCorrectionFactor"
+                               @bind="ViewModel.CapacityCorrectionFactor"
+                               placeholder="0" />
                     </div>
 
-                    <div class="mb-3">
-                        <label for="coefficientOfDischarge" class="form-label">Coefficient of Discharge (kd)</label>
-                        <input type="number" class="form-control" id="coefficientOfDischarge" @bind="CoefficientOfDischarge" step="0.01" />
+                    <div class="mb-4">
+                        <label for="coefficientOfDischarge" class="modern-label">Coefficient of Discharge (Kd)</label>
+                        <input type="number"
+                               class="modern-input @(ViewModel.CoefficientOfDischarge == 0 ? "default-value" : "")"
+                               id="coefficientOfDischarge"
+                               @bind="ViewModel.CoefficientOfDischarge"
+                               placeholder="0" />
                     </div>
 
-                    <div class="mb-3">
-                        <label for="prvSetting" class="form-label">PRV Setting (Set Point)</label>
-                        <input type="number" class="form-control" id="prvSetting" @bind="PrvSetting" />
+                    <div class="mb-4">
+                        <label for="viscosityCorrectionFactor" class="modern-label">Viscosity Correction Factor (Kv)</label>
+                        <input type="number"
+                               class="modern-input @(ViewModel.ViscosityCorrectionFactor == 0 ? "default-value" : "")"
+                               id="viscosityCorrectionFactor"
+                               @bind="ViewModel.ViscosityCorrectionFactor"
+                               placeholder="0" />
                     </div>
 
-                    <div class="mb-3">
-                        <label for="maxHydrostaticBackpressure" class="form-label">Max Hydrostatic Backpressure (P2)</label>
-                        <input type="number" class="form-control" id="maxHydrostaticBackpressure" @bind="MaxHydrostaticBackpressure" />
+                    <div class="mb-4">
+                        <label for="prvSetting" class="modern-label">PRV Setting (Set Point)</label>
+                        <input type="number"
+                               class="modern-input @(ViewModel.PrvSetting == 0 ? "default-value" : "")"
+                               id="prvSetting"
+                               @bind="ViewModel.PrvSetting"
+                               placeholder="0" />
                     </div>
 
-                    <button class="btn btn-primary" @onclick="CalculateRequiredArea">Calculate</button>
+                    <div class="mb-4">
+                        <label for="maxHydrostaticBackpressure" class="modern-label">Max Hydrostatic Backpressure (P2)</label>
+                        <input type="number"
+                               class="modern-input @(ViewModel.MaxHydrostaticBackpressure == 0 ? "default-value" : "")"
+                               id="maxHydrostaticBackpressure"
+                               @bind="ViewModel.MaxHydrostaticBackpressure"
+                               placeholder="0" />
+                    </div>
 
+                    <div class="mb-4">
+
+                    <button class="btn-calculate" @onclick="ViewModel.CalculateRequiredArea">Calculate</button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        
-        
-
-        <div class="col-md-6">
+        <!-- Results -->
+        <br />
+        <div class="column">
             <div class="card">
-                <div class="card-header">Results</div>
+                <h4>Results</h4>
                 <div class="card-body">
-                    <div class="alert @(HasError ? "alert-danger" : "alert-info")">
-                        @if (HasError)
+                    <div class="alert @(ViewModel.HasError ? "alert-danger" : "alert-info")">
+                        @if (ViewModel.HasError)
                         {
-                            <span>@ErrorMessage</span>
+                            <span>@ViewModel.ErrorMessage</span>
                         }
-                        else if (CalculationPerformed)
+                        else if (ViewModel.CalculationPerformed)
                         {
                             <div>
-                                <h5>Required Area: @RequiredArea.ToString("F6") square inches</h5>
-                                <p>Over Pressure PRV (P1): @OverPressurePrv</p>
+                                <h5>Required Area: @ViewModel.RequiredArea.ToString("F6") square inches</h5>
+                                <p>Over Pressure PRV (P1): @ViewModel.OverPressurePrv</p>
                             </div>
                         }
                         else
@@ -76,58 +109,42 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <!-- Bottom section with formula spanning full width -->
+    </div>
+    <div class="bottom-section">
+            <!-- Formula Display -->
             <div class="formula-container text-center my-4">
                 <div style="font-size: 1.5rem;">
                     \[A = \frac{Q}{38K_dK_wK_v} \sqrt{\frac{G}{p_1-p_2}}\]
                 </div>
             </div>
-        </div>
-
-        <div class="card mt-3">
-            <div class="card-header">Formula Used</div>
-            <div class="card-body">
-                <p>Where:</p>
-                <ul>
-                    <li>𝐴: Required discharge area (in²)</li>
-                    <li>𝑄: Flow rate (gpm)</li>
-                    <li>𝐾𝑑: Coefficient of discharge (dimensionless)</li>
-                    <li>𝐾𝑤: Capacity correction factor (dimensionless)</li>
-                    <li>𝐾𝑣: Viscosity correction factor (dimensionless)</li>
-                    <li>𝐺: Specific gravity of the fluid (sg)</li>
-                    <li>𝑃1​: Set pressure plus overpressure (psi)</li>
-                    <li>𝑃2: Backpressure (psi)</li>
-                </ul>
+            <!-- Formula Display -->
+            <div class="card">
+                <div class="card-header">Formula Used</div>
+                <div class="card-body">
+                    <p>Where:</p>
+                    <ul>
+                        <li>𝐴: Required discharge area (in²)</li>
+                        <li>𝑄: Flow rate (gpm)</li>
+                        <li>𝐾𝑑: Coefficient of discharge (dimensionless)</li>
+                        <li>𝐾𝑤: Capacity correction factor (dimensionless)</li>
+                        <li>𝐾𝑣: Viscosity correction factor (dimensionless)</li>
+                        <li>𝐺: Specific gravity of the fluid (sg)</li>
+                        <li>𝑃1​: Set pressure plus overpressure (psi)</li>
+                        <li>𝑃2: Backpressure (psi)</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-
 </div>
 
 @code {
-    //TODO: Separate Models for calculations and data
-
-
-    // Input parameters
-    private double MaxPumpRate { get; set; }
-    private double MudWeight { get; set; } = 1.20; // Default value
-    private double CapacityCorrectionFactor { get; set; } = 1.0; // Default value
-    private double CoefficientOfDischarge { get; set; } = 0.65; // Default value
-    private double PrvSetting { get; set; }
-    private double MaxHydrostaticBackpressure { get; set; }
-
-    // Output parameters
-    private double RequiredArea { get; set; }
-    private double OverPressurePrv { get; set; }
-    private bool CalculationPerformed { get; set; } = false;
-    private bool HasError { get; set; } = false;
-    private string ErrorMessage { get; set; } = "";
+    private PRVCalculationViewModel ViewModel { get; set; } = new PRVCalculationViewModel();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            // await JSRuntime.InvokeVoidAsync("eval", "if (typeof MathJax !== 'undefined') { MathJax.typeset(); }");
             await JSRuntime.InvokeVoidAsync("eval", @"
             if (typeof window.MathJax === 'undefined') {
                 // MathJax config
@@ -156,67 +173,15 @@
                 MathJax.typeset();
             }
         ");
-        }
-    }
 
-    private void CalculateRequiredArea()
-    {
-        try
-        {
-            HasError = false;
-            ErrorMessage = "";
-
-            // Validate input
-            if (MaxPumpRate <= 0)
-            {
-                HasError = true;
-                ErrorMessage = "Max Pump Rate must be greater than zero.";
-                return;
-            }
-
-            if (MudWeight <= 0)
-            {
-                HasError = true;
-                ErrorMessage = "Mud Weight must be greater than zero.";
-                return;
-            }
-
-            if (CapacityCorrectionFactor <= 0)
-            {
-                HasError = true;
-                ErrorMessage = "Capacity Correction Factor must be greater than zero.";
-                return;
-            }
-
-            if (CoefficientOfDischarge <= 0)
-            {
-                HasError = true;
-                ErrorMessage = "Coefficient of Discharge must be greater than zero.";
-                return;
-            }
-
-            // Calculate P1 (Over Pressure PRV)
-            OverPressurePrv = PrvSetting + (0.1 * PrvSetting);
-
-            if (OverPressurePrv <= MaxHydrostaticBackpressure)
-            {
-                HasError = true;
-                ErrorMessage = "P1 (Over Pressure PRV) must be greater than P2 (Max Hydrostatic Backpressure).";
-                return;
-            }
-
-            // Calculate the required area using the formula
-            double numerator = MaxPumpRate;
-            double denominator = 38 * CapacityCorrectionFactor * CoefficientOfDischarge;
-            double pressureTerm = Math.Sqrt(MudWeight / (OverPressurePrv - MaxHydrostaticBackpressure));
-
-            RequiredArea = (numerator / denominator) * pressureTerm;
-            CalculationPerformed = true;
-        }
-        catch (Exception ex)
-        {
-            HasError = true;
-            ErrorMessage = $"Error in calculation: {ex.Message}";
+            // Code to match button width to inputs
+            await JSRuntime.InvokeVoidAsync("eval", @"
+            // Wait a brief moment to ensure DOM is fully rendered
+            setTimeout(function() {
+                const inputWidth = document.querySelector('.modern-input').offsetWidth;
+                document.querySelector('.btn-calculate').style.width = inputWidth + 'px';
+            }, 100);
+        ");
         }
     }
 }
