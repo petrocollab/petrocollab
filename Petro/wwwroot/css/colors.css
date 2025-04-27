@@ -1,0 +1,23 @@
+﻿:root {
+    /* Primary colors */
+    --primary-light: #859372;
+    --primary-dark: #5B6B46;
+    --primary-dark-20: #5B6B4633;
+    --primary-dark-30: #5B6B464D;
+    /* Secondary colors */
+    
+    /* Status colors */
+    
+    /* Text colors */
+    --text-primary: #333333;
+    
+    /* Background colors */
+    --bg-white: #ffffff;
+    --bg-white-shadow: #00000008;
+    --bg-gray: #efefef;
+    /* Border colors */
+    --brd-gray: #efefef;
+    --brd-dark: #c0c0c0;
+    --divider: #efefef;
+    --hover-gray: #E8E8E8;
+}

@@ -26,7 +26,7 @@
     clear: both;
     width: 100%;
     padding: 0 10px;
-    border-top: 1px solid #EFEFEF; /* Light divider */
+    border-top: 1px solid var(--divider); /* Light divider */
     margin-top: 10px;
     padding-top: 20px;
 }
@@ -56,7 +56,7 @@
     display: block;
     margin-bottom: 5px;
     font-weight: 550;
-    color: #333333;
+    color: var(--text-primary);
 }
 
 .modern-input {
@@ -65,23 +65,23 @@
     margin-bottom: 10px;
     font-size: 1rem;
     font-weight: 400;
-    color: #333333;
-    background-color: #ffffff;
+    color: var(--text-primary);
+    background-color: var(--bg-white);
     background-clip: padding-box;
-    border: 1px solid #EFEFEF;
+    border: 1px solid var(--brd-gray);
     border-radius: 4px;
     transition: border-color 0.15s ease-in-out;
 }
 
     .modern-input:focus {
         outline: none;
-        border-color: #c0c0c0;
+        border-color: var(--brd-dark);
         box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
     }
 
     /* Hover effect */
     .modern-input:hover {
-        border-color: #c0c0c0;
+        border-color: var(--brd-dark);
         box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.03);
     }
 
@@ -107,8 +107,8 @@ input[type=number] {
     padding: 4px 0;
     font-size: 1rem;
     font-weight: 500;
-    color: white;
-    background-color: #008348; /* Green color */
+    color: var(--bg-white);
+    background-color: var(--primary-dark); /* Green color */
     border: none;
     border-radius: 4px; /* Same rounded borders */
     transition: all 0.2s ease;
@@ -117,13 +117,13 @@ input[type=number] {
 }
 
     .btn-calculate:hover {
-        background-color: #009d56; /* Lighter green */
-        box-shadow: 0 0 0 3px rgba(0, 131, 72, 0.2); /* Shadow with main color */
+        background-color: var(--primary-light); /* Lighter green */
+        box-shadow: 0 0 0 3px var(--primary-dark-20); /* Shadow with main color */
     }
 
     .btn-calculate:active {
         transform: translateY(1px); /* Slight push effect */
-        box-shadow: 0 0 0 4px rgba(0, 131, 72, 0.3); /* Darker shadow when clicked */
+        box-shadow: 0 0 0 4px var(--primary-dark-30); /* Darker shadow when clicked */
     }
 
     .btn-calculate:focus {
