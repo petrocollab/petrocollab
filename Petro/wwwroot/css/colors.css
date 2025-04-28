@@ -1,16 +1,16 @@
 ﻿:root {
     /* Primary colors */
-    --primary-light: #859372;
-    --primary-dark: #5B6B46;
-    --primary-dark-20: #5B6B4633;
-    --primary-dark-30: #5B6B464D;
+    --primary: #2D8C57;
+    --primary-hover: #3A9A65;
+    --primary-dark: #66A986;
+    --primary-light: #8CBBA2;
+    --primary-dark-20: #66A98633;
+    --primary-dark-30: #66A9864D;
     /* Secondary colors */
-    
     /* Status colors */
-    
     /* Text colors */
     --text-primary: #333333;
-    
+    --text-secondary: #444444;
     /* Background colors */
     --bg-white: #ffffff;
     --bg-white-shadow: #00000008;
@@ -20,4 +20,8 @@
     --brd-dark: #c0c0c0;
     --divider: #efefef;
     --hover-gray: #E8E8E8;
+    /* Interactive element shadows */
+    --shadow-hover-size: 0 0 0 3px;
+    --shadow-focus-size: 0 0 0 3px;
+    --shadow-active-size: 0 0 0 4px;
 }
