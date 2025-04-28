@@ -12,6 +12,12 @@ namespace Petro.ViewModels
         public PRVCalculationViewModel()
         {
             _calculationService = new PRVCalculationService();
+
+            // Ensure MudWeights has at least one value
+            if (_parameters.MudWeights.Count == 0)
+            {
+                _parameters.MudWeights = new List<double> { 1.20 };
+            }
         }
 
         public double MaxPumpRate
@@ -24,13 +30,35 @@ namespace Petro.ViewModels
             }
         }
 
-        public double MudWeight
+        public List<double> MudWeights
         {
-            get => _parameters.MudWeight;
-            set
+            get => _parameters.MudWeights;
+        }
+
+        public void UpdateMudWeight(int index, double value)
+        {
+            if (index >= 0 && index < _parameters.MudWeights.Count)
             {
-                _parameters.MudWeight = value;
-                OnPropertyChanged();
+                _parameters.MudWeights[index] = value;
+                OnPropertyChanged(nameof(MudWeights));
+            }
+        }
+
+        public void AddMudWeight()
+        {
+            if (_parameters.MudWeights.Count < 5)
+            {
+                _parameters.MudWeights.Add(1.20); // Default value
+                OnPropertyChanged(nameof(MudWeights));
+            }
+        }
+
+        public void DeleteMudWeight(int index)
+        {
+            if (_parameters.MudWeights.Count > 1 && index >= 0 && index < _parameters.MudWeights.Count)
+            {
+                _parameters.MudWeights.RemoveAt(index);
+                OnPropertyChanged(nameof(MudWeights));
             }
         }
 

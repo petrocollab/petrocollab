@@ -1,5 +1,6 @@
 ﻿@page "/prv-calculator"
 @using Petro.ViewModels
+@using Petro.Components.Elements.PRVCalculation
 @inject IJSRuntime JSRuntime
 
 
@@ -20,14 +21,7 @@
                                placeholder="0" />
                     </div>
 
-                    <div class="mb-4">
-                        <label for="mudWeight" class="modern-label">Mud Weight (sg)</label>
-                        <input type="number"
-                               class="modern-input @(ViewModel.MudWeight == 0 ? "default-value" : "")"
-                               id="mudWeight"
-                               @bind="ViewModel.MudWeight"
-                               placeholder="0" />
-                    </div>
+                    <MudWeightInputs ViewModel="ViewModel" />
 
                     <div class="mb-4">
                         <label for="capacityCorrectionFactor" class="modern-label">Capacity Correction Factor (Kw)</label>
@@ -139,7 +133,8 @@
 </div>
 
 @code {
-    private PRVCalculationViewModel ViewModel { get; set; } = new PRVCalculationViewModel();
+    // private PRVCalculationViewModel ViewModel { get; set; } = new PRVCalculationViewModel();
+    public PRVCalculationViewModel ViewModel { get; set; } = new PRVCalculationViewModel();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

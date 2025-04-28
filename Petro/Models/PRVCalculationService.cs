@@ -5,12 +5,14 @@
 
         public (bool Success, double RequiredArea, double OverPressurePrv, string ErrorMessage) Calculate(PRVParemetersModel parameters)
         {
-            // Validation
+            // Ensure there's at least one mud weight
+            if (parameters.MudWeights == null || parameters.MudWeights.Count == 0)
+                return (false, 0, 0, "At least one Mud Weight must be provided.");
             // Validation
             if (parameters.FlowRate <= 0)
                 return (false, 0, 0, "Max Pump Rate must be greater than zero.");
 
-            if (parameters.MudWeight <= 0)
+            if (parameters.MudWeights[0] <= 0)
                 return (false, 0, 0, "Mud Weight must be greater than zero.");
 
             if (parameters.CapacityCorrectionFactor <= 0)
@@ -34,7 +36,7 @@
                                parameters.CoefficientOfDischarge *
                                parameters.ViscosityCorrectionFactor;
 
-            double pressureTerm = Math.Sqrt(parameters.MudWeight /
+            double pressureTerm = Math.Sqrt(parameters.MudWeights[0] /
                                (overPressurePrv - parameters.MaxHydrostaticBackpressure));
 
             double requiredArea = (numerator / denominator) * pressureTerm;
