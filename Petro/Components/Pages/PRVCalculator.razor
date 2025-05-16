@@ -1,76 +1,86 @@
 ﻿@page "/prv-calculator"
 @using Petro.ViewModels
+@inject PRVCalculationViewModel ViewModel
 @using Petro.Components.Elements.PRVCalculation
 @inject IJSRuntime JSRuntime
 
-
 <div class="calculator-page">
-    <h3>PRV Calculator</h3>
+    <h3>@ViewModel.StringResources.PageTitle</h3>
 
     <div class="top-row">
         <div class="column">
             <div class="card">
-                <h4>Input Parameters</h4>
+                <h4>@ViewModel.StringResources.InputParameters.Title</h4>
                 <div class="card-body">
                     <div class="mb-4">
-                        <label for="maxPumpRate" class="modern-label">Max Pump Rate (gpm)</label>
+                        <label for="maxPumpRate" class="modern-label">@ViewModel.StringResources.InputParameters.MaxPumpRate</label>
                         <input type="number"
-                               class="modern-input @(ViewModel.MaxPumpRate == 0 ? "default-value" : "")"
-                               id="maxPumpRate"
-                               @bind="ViewModel.MaxPumpRate"
-                               placeholder="0" />
+                        class="modern-input @(ViewModel.MaxPumpRate == 0 ? "default-value" : "")"
+                        id="maxPumpRate"
+                        @bind="ViewModel.MaxPumpRate"
+                        placeholder="0" />
                     </div>
-
+                  
+                  /*        
+                    <div class="mb-4">
+                        <label for="mudWeight" class="modern-label">@ViewModel.StringResources.InputParameters.MudWeight</label>
+                        <input type="number"
+                        class="modern-input @(ViewModel.MudWeight == 0 ? "default-value" : "")"
+                        id="mudWeight"
+                        @bind="ViewModel.MudWeight"
+                        placeholder="0" />
+                    </div>
+                  */
                     <MudWeightInputs ViewModel="ViewModel" />
 
                     <div class="mb-4">
-                        <label for="capacityCorrectionFactor" class="modern-label">Capacity Correction Factor (Kw)</label>
+                        <label for="capacityCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CapacityCorrectionFactor</label>
                         <input type="number"
-                               class="modern-input @(ViewModel.CapacityCorrectionFactor == 0 ? "default-value" : "")"
-                               id="capacityCorrectionFactor"
-                               @bind="ViewModel.CapacityCorrectionFactor"
-                               placeholder="0" />
+                        class="modern-input @(ViewModel.CapacityCorrectionFactor == 0 ? "default-value" : "")"
+                        id="capacityCorrectionFactor"
+                        @bind="ViewModel.CapacityCorrectionFactor"
+                        placeholder="0" />
                     </div>
 
                     <div class="mb-4">
-                        <label for="coefficientOfDischarge" class="modern-label">Coefficient of Discharge (Kd)</label>
+                        <label for="coefficientOfDischarge" class="modern-label">@ViewModel.StringResources.InputParameters.CoefficientOfDischarge</label>
                         <input type="number"
-                               class="modern-input @(ViewModel.CoefficientOfDischarge == 0 ? "default-value" : "")"
-                               id="coefficientOfDischarge"
-                               @bind="ViewModel.CoefficientOfDischarge"
-                               placeholder="0" />
+                        class="modern-input @(ViewModel.CoefficientOfDischarge == 0 ? "default-value" : "")"
+                        id="coefficientOfDischarge"
+                        @bind="ViewModel.CoefficientOfDischarge"
+                        placeholder="0" />
                     </div>
 
                     <div class="mb-4">
-                        <label for="viscosityCorrectionFactor" class="modern-label">Viscosity Correction Factor (Kv)</label>
+                        <label for="viscosityCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.ViscosityCorrectionFactor</label>
                         <input type="number"
-                               class="modern-input @(ViewModel.ViscosityCorrectionFactor == 0 ? "default-value" : "")"
-                               id="viscosityCorrectionFactor"
-                               @bind="ViewModel.ViscosityCorrectionFactor"
-                               placeholder="0" />
+                        class="modern-input @(ViewModel.ViscosityCorrectionFactor == 0 ? "default-value" : "")"
+                        id="viscosityCorrectionFactor"
+                        @bind="ViewModel.ViscosityCorrectionFactor"
+                        placeholder="0" />
                     </div>
 
                     <div class="mb-4">
-                        <label for="prvSetting" class="modern-label">PRV Setting (Set Point)</label>
+                        <label for="prvSetting" class="modern-label">@ViewModel.StringResources.InputParameters.PrvSetting</label>
                         <input type="number"
-                               class="modern-input @(ViewModel.PrvSetting == 0 ? "default-value" : "")"
-                               id="prvSetting"
-                               @bind="ViewModel.PrvSetting"
-                               placeholder="0" />
+                        class="modern-input @(ViewModel.PrvSetting == 0 ? "default-value" : "")"
+                        id="prvSetting"
+                        @bind="ViewModel.PrvSetting"
+                        placeholder="0" />
                     </div>
 
                     <div class="mb-4">
-                        <label for="maxHydrostaticBackpressure" class="modern-label">Max Hydrostatic Backpressure (P2)</label>
+                        <label for="maxHydrostaticBackpressure" class="modern-label">@ViewModel.StringResources.InputParameters.MaxHydrostaticBackpressure</label>
                         <input type="number"
-                               class="modern-input @(ViewModel.MaxHydrostaticBackpressure == 0 ? "default-value" : "")"
-                               id="maxHydrostaticBackpressure"
-                               @bind="ViewModel.MaxHydrostaticBackpressure"
-                               placeholder="0" />
+                        class="modern-input @(ViewModel.MaxHydrostaticBackpressure == 0 ? "default-value" : "")"
+                        id="maxHydrostaticBackpressure"
+                        @bind="ViewModel.MaxHydrostaticBackpressure"
+                        placeholder="0" />
                     </div>
 
                     <div class="mb-4">
 
-                    <button class="btn-calculate" @onclick="ViewModel.CalculateRequiredArea">Calculate</button>
+                        <button class="btn-calculate" @onclick="ViewModel.CalculateRequiredArea">@ViewModel.StringResources.InputParameters.CalculateButton</button>
                     </div>
                 </div>
             </div>
@@ -80,7 +90,7 @@
         <br />
         <div class="column">
             <div class="card">
-                <h4>Results</h4>
+                <h4>@ViewModel.StringResources.Results.Title</h4>
                 <div class="card-body">
                     <div class="alert @(ViewModel.HasError ? "alert-danger" : "alert-info")">
                         @if (ViewModel.HasError)
@@ -90,13 +100,13 @@
                         else if (ViewModel.CalculationPerformed)
                         {
                             <div>
-                                <h5>Required Area: @ViewModel.RequiredArea.ToString("F6") square inches</h5>
-                                <p>Over Pressure PRV (P1): @ViewModel.OverPressurePrv</p>
+                                <h5>@ViewModel.StringResources.Results.RequiredAreaPrefix @ViewModel.RequiredArea.ToString("F6") @ViewModel.StringResources.Results.RequiredAreaSuffix</h5>
+                                <p>@ViewModel.StringResources.Results.OverPressurePrvLabel @ViewModel.OverPressurePrv</p>
                             </div>
                         }
                         else
                         {
-                            <span>Enter values and click Calculate to see results.</span>
+                            <span>@ViewModel.StringResources.Results.DefaultMessage</span>
                         }
                     </div>
                 </div>
@@ -106,35 +116,37 @@
         <!-- Bottom section with formula spanning full width -->
     </div>
     <div class="bottom-section">
-            <!-- Formula Display -->
-            <div class="formula-container text-center my-4">
-                <div style="font-size: 1.5rem;">
-                    \[A = \frac{Q}{38K_dK_wK_v} \sqrt{\frac{G}{p_1-p_2}}\]
-                </div>
-            </div>
-            <!-- Formula Display -->
-            <div class="card">
-                <div class="card-header">Formula Used</div>
-                <div class="card-body">
-                    <p>Where:</p>
-                    <ul>
-                        <li>𝐴: Required discharge area (in²)</li>
-                        <li>𝑄: Flow rate (gpm)</li>
-                        <li>𝐾𝑑: Coefficient of discharge (dimensionless)</li>
-                        <li>𝐾𝑤: Capacity correction factor (dimensionless)</li>
-                        <li>𝐾𝑣: Viscosity correction factor (dimensionless)</li>
-                        <li>𝐺: Specific gravity of the fluid (sg)</li>
-                        <li>𝑃1​: Set pressure plus overpressure (psi)</li>
-                        <li>𝑃2: Backpressure (psi)</li>
-                    </ul>
-                </div>
+        <!-- Formula Display -->
+        <div class="formula-container text-center my-4">
+            <div style="font-size: 1.5rem;">
+                @((MarkupString)ViewModel.StringResources.Formula.FormulaLatex)
             </div>
         </div>
+        <!-- Formula Display -->
+        <div class="card">
+            <div class="card-header">@ViewModel.StringResources.Formula.Title</div>
+            <div class="card-body">
+                <p>@ViewModel.StringResources.Formula.Description</p>
+                <ul>
+                    <li>@ViewModel.StringResources.Formula.Variables.Area</li>
+                    <li>@ViewModel.StringResources.Formula.Variables.FlowRate</li>
+                    <li>@ViewModel.StringResources.Formula.Variables.CoefficientOfDischarge</li>
+                    <li>@ViewModel.StringResources.Formula.Variables.CapacityCorrectionFactor</li>
+                    <li>@ViewModel.StringResources.Formula.Variables.ViscosityCorrectionFactor</li>
+                    <li>@ViewModel.StringResources.Formula.Variables.SpecificGravity</li>
+                    <li>@ViewModel.StringResources.Formula.Variables.SetPressure</li>
+                    <li>@ViewModel.StringResources.Formula.Variables.Backpressure</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
 @code {
     // private PRVCalculationViewModel ViewModel { get; set; } = new PRVCalculationViewModel();
-    public PRVCalculationViewModel ViewModel { get; set; } = new PRVCalculationViewModel();
+    protected override async Task OnInitializedAsync() {
+        await ViewModel.LoadResourcesAsync();
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
