@@ -20,17 +20,7 @@
                         @bind="ViewModel.MaxPumpRate"
                         placeholder="0" />
                     </div>
-                  
-                  /*        
-                    <div class="mb-4">
-                        <label for="mudWeight" class="modern-label">@ViewModel.StringResources.InputParameters.MudWeight</label>
-                        <input type="number"
-                        class="modern-input @(ViewModel.MudWeight == 0 ? "default-value" : "")"
-                        id="mudWeight"
-                        @bind="ViewModel.MudWeight"
-                        placeholder="0" />
-                    </div>
-                  */
+
                     <MudWeightInputs ViewModel="ViewModel" />
 
                     <div class="mb-4">

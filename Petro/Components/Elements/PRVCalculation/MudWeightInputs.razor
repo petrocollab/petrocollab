@@ -7,7 +7,7 @@
         <div class="mb-4">
             @if (i == 0)
             {
-                <label for="mudWeight0" class="modern-label">Mud Weight (sg)</label>
+                <label for="mudWeight0" class="modern-label">@ViewModel.StringResources.InputParameters.MudWeight</label>
                 <div class="d-flex align-items-center">
                     @if (ViewModel.MudWeights.Count > 1)
                     {
@@ -51,7 +51,7 @@
     {
         <div class="mb-4">
             <button type="button" class="btn btn-secondary" @onclick="ViewModel.AddMudWeight">
-                + Add Mud Weight
+                @ViewModel.StringResources.InputParameters.AddMudWeight
             </button>
         </div>
     }

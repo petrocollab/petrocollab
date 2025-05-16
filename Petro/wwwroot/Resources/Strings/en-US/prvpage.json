@@ -9,7 +9,8 @@
         "ViscosityCorrectionFactor": "Viscosity Correction Factor (Kv)",
         "PrvSetting": "PRV Setting (Set Point)",
         "MaxHydrostaticBackpressure": "Max Hydrostatic Backpressure (P2)",
-        "CalculateButton": "Calculate"
+        "CalculateButton": "Calculate",
+        "AddMudWeight": "+ Add Mud Weight"
     },
     "Results": {
         "Title": "Results",
