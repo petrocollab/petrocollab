@@ -32,6 +32,8 @@ namespace Petro.ViewModels
             {
                 _parameters.FlowRate = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(IsMaxPumpRateValid));
+                OnPropertyChanged(nameof(IsFormValid));
             }
         }
 
@@ -46,6 +48,8 @@ namespace Petro.ViewModels
             {
                 _parameters.MudWeights[index] = value;
                 OnPropertyChanged(nameof(MudWeights));
+                OnPropertyChanged(nameof(AreAllMudWeightsValid));
+                OnPropertyChanged(nameof(IsFormValid));
             }
         }
 
@@ -64,6 +68,8 @@ namespace Petro.ViewModels
             {
                 _parameters.MudWeights.RemoveAt(index);
                 OnPropertyChanged(nameof(MudWeights));
+                OnPropertyChanged(nameof(AreAllMudWeightsValid));
+                OnPropertyChanged(nameof(IsFormValid));
             }
         }
 
@@ -74,6 +80,8 @@ namespace Petro.ViewModels
             {
                 _parameters.CapacityCorrectionFactor = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(IsCapacityCorrectionFactorValid));
+                OnPropertyChanged(nameof(IsFormValid));
             }
         }
 
@@ -84,6 +92,8 @@ namespace Petro.ViewModels
             {
                 _parameters.CoefficientOfDischarge = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(IsCoefficientOfDischargeValid));
+                OnPropertyChanged(nameof(IsFormValid));
             }
         }
 
@@ -94,6 +104,8 @@ namespace Petro.ViewModels
             {
                 _parameters.ViscosityCorrectionFactor = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(IsViscosityCorrectionFactorValid));
+                OnPropertyChanged(nameof(IsFormValid));
             }
         }
 
@@ -104,6 +116,8 @@ namespace Petro.ViewModels
             {
                 _parameters.PrvSetting = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(IsPrvSettingValid));
+                OnPropertyChanged(nameof(IsFormValid));
             }
         }
 
@@ -125,6 +139,21 @@ namespace Petro.ViewModels
         public bool CalculationPerformed { get; private set; }
         public bool HasError { get; private set; }
         public string ErrorMessage { get; private set; }
+
+        // Validation properties
+        public bool IsMaxPumpRateValid => MaxPumpRate.HasValue && MaxPumpRate > 0;
+        public bool IsPrvSettingValid => PrvSetting.HasValue && PrvSetting.Value > 0;
+        public bool AreAllMudWeightsValid => MudWeights != null && MudWeights.Count > 0 && MudWeights.All(weight => weight > 0);
+        public bool IsCapacityCorrectionFactorValid => CapacityCorrectionFactor > 0;
+        public bool IsCoefficientOfDischargeValid => CoefficientOfDischarge > 0;
+        public bool IsViscosityCorrectionFactorValid => ViscosityCorrectionFactor > 0;
+
+        public bool IsFormValid => IsMaxPumpRateValid &&
+                                  IsPrvSettingValid &&
+                                  AreAllMudWeightsValid &&
+                                  IsCapacityCorrectionFactorValid &&
+                                  IsCoefficientOfDischargeValid &&
+                                  IsViscosityCorrectionFactorValid;
 
         // Load string resources from JSON
         public async Task LoadResourcesAsync()

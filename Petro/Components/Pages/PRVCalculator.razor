@@ -67,8 +67,10 @@
                     </div>
 
                     <div class="mb-4">
-
-                        <button class="btn-calculate" @onclick="ViewModel.CalculateRequiredArea">@ViewModel.StringResources.InputParameters.CalculateButton</button>
+                        <button class="btn-calculate" 
+                        @onclick="ViewModel.CalculateRequiredArea"
+                                disabled="@(!ViewModel.IsFormValid)">
+                        @ViewModel.StringResources.InputParameters.CalculateButton</button>
                     </div>
                 </div>
             </div>
