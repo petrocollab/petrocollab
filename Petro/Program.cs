@@ -10,6 +10,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<HomeViewModel>();
+builder.Services.AddScoped<PRVCalculationViewModel>();
 builder.Services.AddApexCharts();
 
 var app = builder.Build();

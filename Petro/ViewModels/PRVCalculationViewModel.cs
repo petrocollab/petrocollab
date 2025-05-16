@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
 using Petro.Models;
 
 namespace Petro.ViewModels
@@ -8,9 +9,13 @@ namespace Petro.ViewModels
     {
         private readonly PRVCalculationService _calculationService;
         private readonly PRVParemetersModel _parameters = new PRVParemetersModel();
+        private readonly IWebHostEnvironment _environment;
 
-        public PRVCalculationViewModel()
+        public PRVStringResourceModel StringResources { get; private set; } = new PRVStringResourceModel();
+
+        public PRVCalculationViewModel(IWebHostEnvironment environment)
         {
+            _environment = environment;
             _calculationService = new PRVCalculationService();
         }
 
@@ -92,6 +97,29 @@ namespace Petro.ViewModels
         public bool CalculationPerformed { get; private set; }
         public bool HasError { get; private set; }
         public string ErrorMessage { get; private set; }
+
+        // Load string resources from JSON
+        public async Task LoadResourcesAsync()
+        {
+            try
+            {
+                string filePath = Path.Combine(_environment.WebRootPath, "Resources", "Strings", "en-US", "prvpage.json");
+                var jsonString = await File.ReadAllTextAsync(filePath);
+                StringResources = JsonSerializer.Deserialize<PRVStringResourceModel>(jsonString, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                }) ?? new PRVStringResourceModel();
+
+                OnPropertyChanged(nameof(StringResources));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading resources: {ex.Message}");
+                // Use default resources if loading fails
+                StringResources = new PRVStringResourceModel();
+            }
+        }
+
 
         // Calculate command
         public void CalculateRequiredArea()

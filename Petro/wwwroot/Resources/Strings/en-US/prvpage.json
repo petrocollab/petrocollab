@@ -1,0 +1,36 @@
+{
+    "Title": "PRV Calculator",
+    "InputParameters": {
+        "Title": "Input Parameters",
+        "MaxPumpRate": "Max Pump Rate (gpm)",
+        "MudWeight": "Mud Weight (sg)",
+        "CapacityCorrectionFactor": "Capacity Correction Factor (Kw)",
+        "CoefficientOfDischarge": "Coefficient of Discharge (Kd)",
+        "ViscosityCorrectionFactor": "Viscosity Correction Factor (Kv)",
+        "PrvSetting": "PRV Setting (Set Point)",
+        "MaxHydrostaticBackpressure": "Max Hydrostatic Backpressure (P2)",
+        "CalculateButton": "Calculate"
+    },
+    "Results": {
+        "Title": "Results",
+        "RequiredAreaPrefix": "Required Area: ",
+        "RequiredAreaSuffix": "square inches",
+        "OverPressurePrvLabel": "Over Pressure PRV (P1): ",
+        "DefaultMessage": "Enter values and click Calculate to see results."
+    },
+    "Formula": {
+        "Title": "Formula Used",
+        "Description": "Where:",
+        "Variables": {
+            "Area": "𝐴: Required discharge area (in²)",
+            "FlowRate": "𝑄: Flow rate (gpm)",
+            "CoefficientOfDischarge": "𝐾𝑑: Coefficient of discharge (dimensionless)",
+            "CapacityCorrectionFactor": "𝐾𝑤: Capacity correction factor (dimensionless)",
+            "ViscosityCorrectionFactor": "𝐾𝑣: Viscosity correction factor (dimensionless)",
+            "SpecificGravity": "𝐺: Specific gravity of the fluid (sg)",
+            "SetPressure": "𝑃1​: Set pressure plus overpressure (psi)",
+            "Backpressure": "𝑃2: Backpressure (psi)"
+        }
+    },
+    "FormulaLatex": "\\[A = \\frac{Q}{38K_dK_wK_v} \\sqrt{\\frac{G}{p_1-p_2}}\\]"
+}
