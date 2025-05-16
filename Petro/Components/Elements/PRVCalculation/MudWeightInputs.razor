@@ -1,0 +1,79 @@
+﻿@using Petro.ViewModels
+
+<div>
+    @for (int i = 0; i < ViewModel.MudWeights.Count; i++)
+    {
+        var index = i;
+        <div class="mb-4">
+            @if (i == 0)
+            {
+                <label for="mudWeight0" class="modern-label">Mud Weight (sg)</label>
+                <div class="d-flex align-items-center">
+                    @if (ViewModel.MudWeights.Count > 1)
+                    {
+                        <button type="button" class="btn btn-danger mr-2" @onclick="() => DeleteMudWeight(index)">
+                            <span>×</span>
+                        </button>
+                    }
+                    <input type="number"
+                           class="modern-input flex-grow-1 @(ViewModel.MudWeights[0] == 0 ? "default-value" : "")"
+                           id="mudWeight0"
+                           value="@ViewModel.MudWeights[0]"
+                           @onchange="@(e => UpdateMudWeight(0, e))"
+                           step="0.01"
+                           min="0"
+                           placeholder="0" />
+                </div>
+            }
+            else
+            {
+                <div class="d-flex align-items-center">
+                    @if (ViewModel.MudWeights.Count > 1)
+                    {
+                        <button type="button" class="btn btn-danger mr-2" @onclick="() => DeleteMudWeight(index)">
+                            <span>×</span>
+                        </button>
+                    }
+                    <input type="number"
+                           class="modern-input flex-grow-1 @(ViewModel.MudWeights[index] == 0 ? "default-value" : "")"
+                           id="mudWeight@(index)"
+                           value="@ViewModel.MudWeights[index]"
+                           @onchange="@(e => UpdateMudWeight(index, e))"
+                           step="0.01"
+                           min="0"
+                           placeholder="0" />
+                </div>
+            }
+        </div>
+    }
+
+    @if (ViewModel.MudWeights.Count < 5)
+    {
+        <div class="mb-4">
+            <button type="button" class="btn btn-secondary" @onclick="ViewModel.AddMudWeight">
+                + Add Mud Weight
+            </button>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public PRVCalculationViewModel ViewModel { get; set; }
+
+    private void UpdateMudWeight(int index, ChangeEventArgs e)
+    {
+        if (ViewModel != null && double.TryParse(e.Value?.ToString(), out double value))
+        {
+            ViewModel.UpdateMudWeight(index, value);
+        }
+    }
+
+    private void DeleteMudWeight(int index)
+    {
+        if (ViewModel.MudWeights.Count > 1) // Ensure we always have at least one mud weight
+        {
+            ViewModel.DeleteMudWeight(index);
+        }
+    }
+}
