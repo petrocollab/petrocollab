@@ -25,7 +25,7 @@ namespace Petro.ViewModels
             }
         }
 
-        public double MaxPumpRate
+        public double? MaxPumpRate
         {
             get => _parameters.FlowRate;
             set
@@ -97,7 +97,7 @@ namespace Petro.ViewModels
             }
         }
 
-        public double PrvSetting
+        public double? PrvSetting
         {
             get => _parameters.PrvSetting;
             set
@@ -107,7 +107,7 @@ namespace Petro.ViewModels
             }
         }
 
-        public double MaxHydrostaticBackpressure
+        public double? MaxHydrostaticBackpressure
         {
             get => _parameters.MaxHydrostaticBackpressure;
             set

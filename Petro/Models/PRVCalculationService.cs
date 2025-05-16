@@ -24,20 +24,23 @@
             if (parameters.ViscosityCorrectionFactor <= 0)
                 return (false, 0, 0, "Viscosity Correction Factor must be greater than zero.");
 
-            double overPressurePrv = parameters.PrvSetting + (0.1 * parameters.PrvSetting);
+            double prvSetting = parameters.PrvSetting ?? 0;
+            double overPressurePrv = prvSetting * 1.1;
 
             if (overPressurePrv <= parameters.MaxHydrostaticBackpressure)
                 return (false, 0, 0, "P1 (Over Pressure PRV) must be greater than P2 (Max Hydrostatic Backpressure).");
 
             // Calculate the required area using the formula
-            double numerator = parameters.FlowRate;
+            double numerator = parameters.FlowRate ?? 0;
 
             double denominator = 38 * parameters.CapacityCorrectionFactor *
                                parameters.CoefficientOfDischarge *
                                parameters.ViscosityCorrectionFactor;
 
+            double maxHydrostaticBackpressure = parameters.MaxHydrostaticBackpressure ?? 0;
+
             double pressureTerm = Math.Sqrt(parameters.MudWeights[0] /
-                               (overPressurePrv - parameters.MaxHydrostaticBackpressure));
+                               (overPressurePrv - maxHydrostaticBackpressure));
 
             double requiredArea = (numerator / denominator) * pressureTerm;
 
