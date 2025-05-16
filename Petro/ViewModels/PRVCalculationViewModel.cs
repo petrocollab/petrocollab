@@ -21,7 +21,7 @@ namespace Petro.ViewModels
             // Ensure MudWeights has at least one value
             if (_parameters.MudWeights.Count == 0)
             {
-                _parameters.MudWeights = new List<double> { 1.20 };
+                _parameters.MudWeights = new List<double?> { null };
             }
         }
 
@@ -35,12 +35,12 @@ namespace Petro.ViewModels
             }
         }
 
-        public List<double> MudWeights
+        public List<double?> MudWeights
         {
             get => _parameters.MudWeights;
         }
 
-        public void UpdateMudWeight(int index, double value)
+        public void UpdateMudWeight(int index, double? value)
         {
             if (index >= 0 && index < _parameters.MudWeights.Count)
             {
@@ -53,7 +53,7 @@ namespace Petro.ViewModels
         {
             if (_parameters.MudWeights.Count < 5)
             {
-                _parameters.MudWeights.Add(1.20); // Default value
+                _parameters.MudWeights.Add(null); // Default value
                 OnPropertyChanged(nameof(MudWeights));
             }
         }

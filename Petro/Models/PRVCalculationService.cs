@@ -39,7 +39,9 @@
 
             double maxHydrostaticBackpressure = parameters.MaxHydrostaticBackpressure ?? 0;
 
-            double pressureTerm = Math.Sqrt(parameters.MudWeights[0] /
+
+
+            double pressureTerm = Math.Sqrt((double)parameters.MudWeights[0] /
                                (overPressurePrv - maxHydrostaticBackpressure));
 
             double requiredArea = (numerator / denominator) * pressureTerm;
