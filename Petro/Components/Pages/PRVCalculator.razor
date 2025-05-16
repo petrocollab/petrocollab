@@ -24,6 +24,22 @@
                     <MudWeightInputs ViewModel="ViewModel" />
 
                     <div class="mb-4">
+                        <label for="prvSetting" class="modern-label">@ViewModel.StringResources.InputParameters.PrvSetting</label>
+                        <input type="number"
+                               class="modern-input @(ViewModel.PrvSetting == 0 ? "default-value" : "")"
+                               id="prvSetting"
+                               @bind="ViewModel.PrvSetting" />
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="maxHydrostaticBackpressure" class="modern-label">@ViewModel.StringResources.InputParameters.MaxHydrostaticBackpressure</label>
+                        <input type="number"
+                               class="modern-input @(ViewModel.MaxHydrostaticBackpressure == 0 ? "default-value" : "")"
+                               id="maxHydrostaticBackpressure"
+                               @bind="ViewModel.MaxHydrostaticBackpressure" />
+                    </div>
+
+                    <div class="mb-4">
                         <label for="capacityCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CapacityCorrectionFactor</label>
                         <input type="number"
                         class="modern-input @(ViewModel.CapacityCorrectionFactor == 0 ? "default-value" : "")"
@@ -48,24 +64,6 @@
                         id="viscosityCorrectionFactor"
                         @bind="ViewModel.ViscosityCorrectionFactor"
                         placeholder="0" />
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="prvSetting" class="modern-label">@ViewModel.StringResources.InputParameters.PrvSetting</label>
-                        <input type="number"
-                        class="modern-input @(ViewModel.PrvSetting == 0 ? "default-value" : "")"
-                        id="prvSetting"
-                        @bind="ViewModel.PrvSetting"
-                        />
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="maxHydrostaticBackpressure" class="modern-label">@ViewModel.StringResources.InputParameters.MaxHydrostaticBackpressure</label>
-                        <input type="number"
-                        class="modern-input @(ViewModel.MaxHydrostaticBackpressure == 0 ? "default-value" : "")"
-                        id="maxHydrostaticBackpressure"
-                        @bind="ViewModel.MaxHydrostaticBackpressure"
-                        />
                     </div>
 
                     <div class="mb-4">
