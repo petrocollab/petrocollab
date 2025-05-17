@@ -131,7 +131,7 @@ namespace Petro.ViewModels
         public double RequiredArea { get; private set; }
         public string AreaComparisonMessage { get; private set; }
         public bool IsAreaAdequate { get; private set; }
-        public bool HasAreaComparison => AvailableArea.HasValue && CalculationPerformed;
+        public bool HasAreaComparison => AvailableArea.HasValue && AvailableArea > 0 && CalculationPerformed;
 
         // UI state
         public bool CalculationPerformed { get; private set; }
@@ -182,7 +182,8 @@ namespace Petro.ViewModels
                         AreaComparisonMessage = IsAreaAdequate
                             ? StringResources.Results.AdequateSizeMessage
                             : StringResources.Results.InadequateSizeMessage;
-                    } else
+                    }
+                    else
                     {
                         AreaComparisonMessage = string.Empty;
                     }

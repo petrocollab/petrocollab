@@ -98,7 +98,16 @@
                         {
                             <div>
                                 <!-- TODO: Add comparison-->
-                                <h5>@ViewModel.StringResources.Results.RequiredAreaPrefix @ViewModel.RequiredArea.ToString("F2") @ViewModel.StringResources.Results.RequiredAreaSuffix</h5>
+                                <h5>@ViewModel.StringResources.Results.RequiredAreaPrefix 
+                                    @ViewModel.RequiredArea.ToString("F2") 
+                                    @ViewModel.StringResources.Results.RequiredAreaSuffix</h5>
+
+                                @if (ViewModel.HasAreaComparison)
+                                {
+                                    <div class="@(ViewModel.IsAreaAdequate ? "alert alert-success" : "alert alert-warning") mt-3">
+                                        <p>@ViewModel.AreaComparisonMessage</p>
+                                    </div>
+                                }
                             </div>
                         }
                         else
