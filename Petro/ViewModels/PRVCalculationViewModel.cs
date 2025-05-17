@@ -25,6 +25,16 @@ namespace Petro.ViewModels
             }
         }
 
+        public double? AvailableArea
+        {
+            get => _parameters.AvailableArea;
+            set
+            {
+                _parameters.AvailableArea = value;
+                OnPropertyChanged();
+            }
+        }
+
         public double? MaxPumpRate
         {
             get => _parameters.FlowRate;
@@ -32,8 +42,6 @@ namespace Petro.ViewModels
             {
                 _parameters.FlowRate = value;
                 OnPropertyChanged();
-                OnPropertyChanged(nameof(IsMaxPumpRateValid));
-                OnPropertyChanged(nameof(IsFormValid));
             }
         }
 
@@ -48,8 +56,6 @@ namespace Petro.ViewModels
             {
                 _parameters.MudWeights[index] = value;
                 OnPropertyChanged(nameof(MudWeights));
-                OnPropertyChanged(nameof(AreAllMudWeightsValid));
-                OnPropertyChanged(nameof(IsFormValid));
             }
         }
 
@@ -68,8 +74,6 @@ namespace Petro.ViewModels
             {
                 _parameters.MudWeights.RemoveAt(index);
                 OnPropertyChanged(nameof(MudWeights));
-                OnPropertyChanged(nameof(AreAllMudWeightsValid));
-                OnPropertyChanged(nameof(IsFormValid));
             }
         }
 
@@ -80,8 +84,6 @@ namespace Petro.ViewModels
             {
                 _parameters.CapacityCorrectionFactor = value;
                 OnPropertyChanged();
-                OnPropertyChanged(nameof(IsCapacityCorrectionFactorValid));
-                OnPropertyChanged(nameof(IsFormValid));
             }
         }
 
@@ -92,20 +94,16 @@ namespace Petro.ViewModels
             {
                 _parameters.CoefficientOfDischarge = value;
                 OnPropertyChanged();
-                OnPropertyChanged(nameof(IsCoefficientOfDischargeValid));
-                OnPropertyChanged(nameof(IsFormValid));
             }
         }
 
-        public double ViscosityCorrectionFactor
+        public double CombinationCorrectionFactor
         {
-            get => _parameters.ViscosityCorrectionFactor;
+            get => _parameters.CombinationCorrectionFactor;
             set
             {
-                _parameters.ViscosityCorrectionFactor = value;
+                _parameters.CombinationCorrectionFactor = value;
                 OnPropertyChanged();
-                OnPropertyChanged(nameof(IsViscosityCorrectionFactorValid));
-                OnPropertyChanged(nameof(IsFormValid));
             }
         }
 
@@ -116,8 +114,6 @@ namespace Petro.ViewModels
             {
                 _parameters.PrvSetting = value;
                 OnPropertyChanged();
-                OnPropertyChanged(nameof(IsPrvSettingValid));
-                OnPropertyChanged(nameof(IsFormValid));
             }
         }
 
@@ -133,27 +129,14 @@ namespace Petro.ViewModels
 
         // Output properties
         public double RequiredArea { get; private set; }
-        public double OverPressurePrv { get; private set; }
+        public string AreaComparisonMessage { get; private set; }
+        public bool IsAreaAdequate { get; private set; }
+        public bool HasAreaComparison => AvailableArea.HasValue && CalculationPerformed;
 
         // UI state
         public bool CalculationPerformed { get; private set; }
         public bool HasError { get; private set; }
         public string ErrorMessage { get; private set; }
-
-        // Validation properties
-        public bool IsMaxPumpRateValid => MaxPumpRate.HasValue && MaxPumpRate > 0;
-        public bool IsPrvSettingValid => PrvSetting.HasValue && PrvSetting.Value > 0;
-        public bool AreAllMudWeightsValid => MudWeights != null && MudWeights.Count > 0 && MudWeights.All(weight => weight > 0);
-        public bool IsCapacityCorrectionFactorValid => CapacityCorrectionFactor > 0;
-        public bool IsCoefficientOfDischargeValid => CoefficientOfDischarge > 0;
-        public bool IsViscosityCorrectionFactorValid => ViscosityCorrectionFactor > 0;
-
-        public bool IsFormValid => IsMaxPumpRateValid &&
-                                  IsPrvSettingValid &&
-                                  AreAllMudWeightsValid &&
-                                  IsCapacityCorrectionFactorValid &&
-                                  IsCoefficientOfDischargeValid &&
-                                  IsViscosityCorrectionFactorValid;
 
         // Load string resources from JSON
         public async Task LoadResourcesAsync()
@@ -188,34 +171,51 @@ namespace Petro.ViewModels
                 if (result.Success)
                 {
                     RequiredArea = result.RequiredArea;
-                    OverPressurePrv = result.OverPressurePrv;
                     CalculationPerformed = true;
                     HasError = false;
                     ErrorMessage = string.Empty;
+
+                    // Compare Required Area with Available Area if provided
+                    if (AvailableArea.HasValue && AvailableArea > 0)
+                    {
+                        IsAreaAdequate = AvailableArea.Value >= RequiredArea;
+                        AreaComparisonMessage = IsAreaAdequate
+                            ? StringResources.Results.AdequateSizeMessage
+                            : StringResources.Results.InadequateSizeMessage;
+                    } else
+                    {
+                        AreaComparisonMessage = string.Empty;
+                    }
                 }
                 else
                 {
                     HasError = true;
                     ErrorMessage = result.ErrorMessage;
                     CalculationPerformed = false;
+                    AreaComparisonMessage = string.Empty;
                 }
 
                 // Notify UI of changes
                 OnPropertyChanged(nameof(RequiredArea));
-                OnPropertyChanged(nameof(OverPressurePrv));
                 OnPropertyChanged(nameof(HasError));
                 OnPropertyChanged(nameof(ErrorMessage));
                 OnPropertyChanged(nameof(CalculationPerformed));
+                OnPropertyChanged(nameof(AreaComparisonMessage));
+                OnPropertyChanged(nameof(IsAreaAdequate));
+                OnPropertyChanged(nameof(HasAreaComparison));
             }
             catch (Exception ex)
             {
                 HasError = true;
                 ErrorMessage = $"Error in calculation: {ex.Message}";
                 CalculationPerformed = false;
+                AreaComparisonMessage = string.Empty;
 
                 OnPropertyChanged(nameof(HasError));
                 OnPropertyChanged(nameof(ErrorMessage));
                 OnPropertyChanged(nameof(CalculationPerformed));
+                OnPropertyChanged(nameof(AreaComparisonMessage));
+                OnPropertyChanged(nameof(HasAreaComparison));
             }
         }
 

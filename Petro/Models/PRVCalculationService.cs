@@ -21,7 +21,7 @@
             if (parameters.CoefficientOfDischarge <= 0)
                 return (false, 0, 0, "Coefficient of Discharge must be greater than zero.");
 
-            if (parameters.ViscosityCorrectionFactor <= 0)
+            if (parameters.CombinationCorrectionFactor <= 0)
                 return (false, 0, 0, "Viscosity Correction Factor must be greater than zero.");
 
             double prvSetting = parameters.PrvSetting ?? 0;
@@ -35,7 +35,7 @@
 
             double denominator = 38 * parameters.CapacityCorrectionFactor *
                                parameters.CoefficientOfDischarge *
-                               parameters.ViscosityCorrectionFactor;
+                               parameters.CombinationCorrectionFactor;
 
             double maxHydrostaticBackpressure = parameters.MaxHydrostaticBackpressure ?? 0;
 
