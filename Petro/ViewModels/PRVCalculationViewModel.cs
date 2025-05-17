@@ -179,9 +179,13 @@ namespace Petro.ViewModels
                     if (AvailableArea.HasValue && AvailableArea > 0)
                     {
                         IsAreaAdequate = AvailableArea.Value >= RequiredArea;
-                        AreaComparisonMessage = IsAreaAdequate
-                            ? StringResources.Results.AdequateSizeMessage
-                            : StringResources.Results.InadequateSizeMessage;
+                        // Format the message with values
+                        AreaComparisonMessage = string.Format(
+                            IsAreaAdequate
+                                ? StringResources.Results.AdequateSizeMessage
+                                : StringResources.Results.InadequateSizeMessage,
+                            AvailableArea.Value.ToString("F2"),
+                            RequiredArea.ToString("F2"));
                     }
                     else
                     {

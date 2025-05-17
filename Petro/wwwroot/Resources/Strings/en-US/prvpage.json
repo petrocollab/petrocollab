@@ -14,15 +14,15 @@
     "CalculateButton": "Calculate",
     "AddMudWeight": "+ Add Mud Weight"
   },
-  "Results": {
-    "Title": "Results",
-    "RequiredAreaPrefix": "Required Area: ",
-    "RequiredAreaSuffix": "in²",
-    "OverPressurePrvLabel": "Over Pressure PRV (P1): ",
-    "DefaultMessage": "Enter values and click Calculate to see results.",
-    "AdequateSizeMessage": "The available discharge area exceeds required area, indicating that the current PRV setup is adequately sized to handle the expected flow rate safely.",
-    "InadequateSizeMessage": "Warning: The available discharge area is less than the required area. The current PRV setup may not be adequately sized to handle the expected flow rate safely."
-  },
+    "Results": {
+        "Title": "Results",
+        "RequiredAreaPrefix": "Required Area: ",
+        "RequiredAreaSuffix": "in²",
+        "OverPressurePrvLabel": "Over Pressure PRV (P1): ",
+        "DefaultMessage": "Enter values and click Calculate to see results.",
+        "AdequateSizeMessage": "The available discharge area of {0} in² exceeds the required area of {1} in², indicating that the current PRV setup is adequately sized to handle the expected flow rate safely.",
+        "InadequateSizeMessage": "Warning: The available discharge area of {0} in² is less than the required area of {1} in². The current PRV setup may not be adequately sized to handle the expected flow rate safely."
+    },
   "Formula": {
     "Title": "Formula Used",
     "Description": "Where:",
