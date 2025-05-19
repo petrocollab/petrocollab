@@ -75,6 +75,15 @@
                     </div>
 
                     <div class="mb-4">
+                        <label for="absoluteViscosity" class="modern-label">@ViewModel.StringResources.InputParameters.AbsoluteViscosity</label>
+                        <input type="number"
+                               class="modern-input @(ViewModel.AbsoluteViscosity == 0 ? "default-value" : "")"
+                               id="absoluteViscosity"
+                               @bind="ViewModel.AbsoluteViscosity"
+                                />
+                    </div>
+
+                    <div class="mb-4">
                         <button class="btn-calculate" 
                         @onclick="ViewModel.CalculateRequiredArea">
                         @ViewModel.StringResources.InputParameters.CalculateButton</button>
@@ -140,6 +149,7 @@
                     <li>@ViewModel.StringResources.Formula.Variables.CapacityCorrectionFactor</li>
                     <li>@ViewModel.StringResources.Formula.Variables.CombinationCorrectionFactor</li>
                     <li>@ViewModel.StringResources.Formula.Variables.ViscosityCorrectionFactor</li>
+                    <li>@ViewModel.StringResources.Formula.Variables.AbsoluteViscosity</li>
                     <li>@ViewModel.StringResources.Formula.Variables.SpecificGravity</li>
                     <li>@ViewModel.StringResources.Formula.Variables.SetPressure</li>
                     <li>@ViewModel.StringResources.Formula.Variables.Backpressure</li>

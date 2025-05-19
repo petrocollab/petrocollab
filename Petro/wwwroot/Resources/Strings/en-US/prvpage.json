@@ -1,19 +1,20 @@
 {
   "Title": "PRV Calculator",
-  "InputParameters": {
-    "Title": "Input Parameters",
-    "MaxPumpRate": "Flow rate (gpm)",
-    "MudWeight": "Mud Weight (sg)",
-    "AvailableArea": "Available Discharge Area (in²)",
-    "CapacityCorrectionFactor": "Capacity Correction Factor (Kw)",
-    "CoefficientOfDischarge": "Coefficient of Discharge (Kd)",
-    "ViscosityCorrectionFactor": "Viscosity Correction Factor (Kv)",
-    "CombinationCorrectionFactor": "Combination Correction Factor (Kc)",
-    "PrvSetting": "PRV Setting (Set Point)",
-    "MaxHydrostaticBackpressure": "Max Hydrostatic Backpressure (psi)",
-    "CalculateButton": "Calculate",
-    "AddMudWeight": "+ Add Mud Weight"
-  },
+    "InputParameters": {
+        "Title": "Input Parameters",
+        "MaxPumpRate": "Flow rate (gpm)",
+        "MudWeight": "Mud Weight (sg)",
+        "AvailableArea": "Available Discharge Area (in²)",
+        "CapacityCorrectionFactor": "Capacity Correction Factor (Kw)",
+        "CoefficientOfDischarge": "Coefficient of Discharge (Kd)",
+        "ViscosityCorrectionFactor": "Viscosity Correction Factor (Kv)",
+        "AbsoluteViscosity": "Absolute viscosity at the flowing temperature, centipoise (µ)",
+        "CombinationCorrectionFactor": "Combination Correction Factor (Kc)",
+        "PrvSetting": "PRV Setting (Set Point)",
+        "MaxHydrostaticBackpressure": "Max Hydrostatic Backpressure (psi)",
+        "CalculateButton": "Calculate",
+        "AddMudWeight": "+ Add Mud Weight"
+    },
     "Results": {
         "Title": "Results",
         "RequiredAreaPrefix": "Required Area: ",
@@ -27,15 +28,16 @@
     "Title": "Formula Used",
     "Description": "Where:",
     "Variables": {
-      "Area": "𝐴: Required discharge area (in²)",
-      "FlowRate": "𝑄: Flow rate (gpm)",
-      "CoefficientOfDischarge": "𝐾𝑑: Rated coefficient of discharge that should be obtained from the valve manufacturer. For a preliminary sizing, an effective discharge coefficient can be used as follows: = 0.65 when a pressure relief valve is installed with or without a rupture disk in combination, = 0.62 when a pressure relief valve is not installed and sizing is for a rupture disk",
-      "CapacityCorrectionFactor": "𝐾𝑤: Correction factor due to back pressure. If the back pressure is atmospheric, use a value for Kw of 1.0",
-      "CombinationCorrectionFactor": "𝐾𝑐: Combination correction factor for installations with a rupture disk upstream of the pressure relief valve, = 1.0 when a rupture disk is not installed, = 0.9 when a rupture disk is installed in combination with a pressure relief valve",
-      "ViscosityCorrectionFactor": "𝐾𝑣: Correction factor due to viscosity, calculated based on Reynold's number",
-      "SpecificGravity": "𝐺: Specific gravity of the fluid (sg)",
-      "SetPressure": "𝑃1​: Set pressure plus overpressure (psi)",
-      "Backpressure": "𝑃2: Backpressure (psi)"
+        "Area": "𝐴: Required discharge area (in²)",
+        "FlowRate": "𝑄: Flow rate (gpm)",
+        "CoefficientOfDischarge": "𝐾𝑑: Rated coefficient of discharge that should be obtained from the valve manufacturer. For a preliminary sizing, an effective discharge coefficient can be used as follows: = 0.65 when a pressure relief valve is installed with or without a rupture disk in combination, = 0.62 when a pressure relief valve is not installed and sizing is for a rupture disk",
+        "CapacityCorrectionFactor": "𝐾𝑤: Correction factor due to back pressure. If the back pressure is atmospheric, use a value for Kw of 1.0",
+        "CombinationCorrectionFactor": "𝐾𝑐: Combination correction factor for installations with a rupture disk upstream of the pressure relief valve, = 1.0 when a rupture disk is not installed, = 0.9 when a rupture disk is installed in combination with a pressure relief valve",
+        "ViscosityCorrectionFactor": "𝐾𝑣: Correction factor due to viscosity, calculated based on Reynold's number",
+        "AbsoluteViscosity": "µ: Absolute viscosity at the flowing temperature, centipoise",
+        "SpecificGravity": "𝐺: Specific gravity of the fluid (sg)",
+        "SetPressure": "𝑃1​: Set pressure plus overpressure (psi)",
+        "Backpressure": "𝑃2: Backpressure (psi)"
     }
   },
   "FormulaLatex": "\\[A = \\frac{Q}{38K_dK_wK_cK_v} \\sqrt{\\frac{G}{p_1-p_2}}\\]"

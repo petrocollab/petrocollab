@@ -20,6 +20,8 @@
             public string CoefficientOfDischarge { get; set; } = "Coefficient of Discharge (Kd)";
             public string ViscosityCorrectionFactor { get; set; } = "Viscosity Correction Factor (Kv)";
             public string CombinationCorrectionFactor { get; set; } = "Combination Correction Factor (Kc)";
+
+            public string AbsoluteViscosity { get; set; } = "Absolute viscosity at the flowing temperature, centipoise (µ)";
             public string PrvSetting { get; set; } = "PRV Setting (Set Point)";
             public string MaxHydrostaticBackpressure { get; set; } = "Max Hydrostatic Backpressure (P2)";
             public string CalculateButton { get; set; } = "Calculate";
@@ -51,6 +53,7 @@
                 public string CapacityCorrectionFactor { get; set; } = "𝐾𝑤: Capacity correction factor (dimensionless)";
                 public string CombinationCorrectionFactor { get; set; } = "𝐾𝑐: Combination correction factor";
                 public string ViscosityCorrectionFactor { get; set; } = "𝐾𝑣: Viscosity correction factor (dimensionless)";
+                public string AbsoluteViscosity { get; set; } = "µ: Absolute viscosity at the flowing temperature, centipoise";
                 public string SpecificGravity { get; set; } = "𝐺: Specific gravity of the fluid (sg)";
                 public string SetPressure { get; set; } = "𝑃1​: Set pressure plus overpressure (psi)";
                 public string Backpressure { get; set; } = "𝑃2: Backpressure (psi)";

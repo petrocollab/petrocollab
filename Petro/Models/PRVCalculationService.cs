@@ -22,7 +22,26 @@
                 return (false, 0, 0, "Coefficient of Discharge must be greater than zero.");
 
             if (parameters.CombinationCorrectionFactor <= 0)
-                return (false, 0, 0, "Viscosity Correction Factor must be greater than zero.");
+                return (false, 0, 0, "Combination Correction Factor must be greater than zero.");
+
+            // Calculate Kv factor
+            double kv = 1.0; // Default value if viscosity or area data is unavailable
+
+            if (parameters.AbsoluteViscosity.HasValue && parameters.AbsoluteViscosity > 0 &&
+                parameters.AvailableArea.HasValue && parameters.AvailableArea > 0)
+            {
+                // Calculate Reynolds number (R)
+                double flowRate = parameters.FlowRate ?? 0;
+                double mudWeight = (double)parameters.MudWeights[0];
+                double absoluteViscosity = parameters.AbsoluteViscosity.Value;
+                double availableArea = parameters.AvailableArea.Value;
+
+                double r = (flowRate * (2800 * mudWeight)) /
+                          (absoluteViscosity * Math.Sqrt(availableArea));
+
+                // Calculate Kv using the formula: Kv = (0.9935 + (2.878 / R^0.5) + (342.75/R^1.5))^-1.0
+                kv = Math.Pow(0.9935 + (2.878 / Math.Sqrt(r)) + (342.75 / Math.Pow(r, 1.5)), -1.0);
+            }
 
             double prvSetting = parameters.PrvSetting ?? 0;
             double overPressurePrv = prvSetting * 1.1;
@@ -35,11 +54,9 @@
 
             double denominator = 38 * parameters.CapacityCorrectionFactor *
                                parameters.CoefficientOfDischarge *
-                               parameters.CombinationCorrectionFactor;
+                               parameters.CombinationCorrectionFactor * kv;
 
             double maxHydrostaticBackpressure = parameters.MaxHydrostaticBackpressure ?? 0;
-
-
 
             double pressureTerm = Math.Sqrt((double)parameters.MudWeights[0] /
                                (overPressurePrv - maxHydrostaticBackpressure));

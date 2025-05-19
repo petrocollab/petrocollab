@@ -107,6 +107,16 @@ namespace Petro.ViewModels
             }
         }
 
+        public double? AbsoluteViscosity
+        {
+            get => _parameters.AbsoluteViscosity;
+            set
+            {
+                _parameters.AbsoluteViscosity = value;
+                OnPropertyChanged();
+            }
+        }
+
         public double? PrvSetting
         {
             get => _parameters.PrvSetting;
