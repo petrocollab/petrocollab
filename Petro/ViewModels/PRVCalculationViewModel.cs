@@ -140,6 +140,7 @@ namespace Petro.ViewModels
         // Output properties
         public double RequiredArea { get; private set; }
         public string AreaComparisonMessage { get; private set; }
+        public string Reynolds { get; private set; } = string.Empty;
         public bool IsAreaAdequate { get; private set; }
         public bool HasAreaComparison => AvailableArea.HasValue && AvailableArea > 0 && CalculationPerformed;
 
@@ -184,6 +185,12 @@ namespace Petro.ViewModels
                     CalculationPerformed = true;
                     HasError = false;
                     ErrorMessage = string.Empty;
+                    Reynolds = string.Empty;
+
+                    if (result.r > 0)
+                    {
+                        Reynolds = StringResources.Results.Reynolds + result.r.ToString("F0");
+                    }
 
                     // Compare Required Area with Available Area if provided
                     if (AvailableArea.HasValue && AvailableArea > 0)

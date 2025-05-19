@@ -33,6 +33,7 @@
             public string Title { get; set; } = "Results";
             public string RequiredAreaPrefix { get; set; } = "Required Area: ";
             public string RequiredAreaSuffix { get; set; } = "in²";
+            public string Reynolds { get; set; } = "Reynold’s Number: ";
             public string DefaultMessage { get; set; } = "Enter values and click Calculate to see results.";
             public string AdequateSizeMessage { get; set; } = "The available discharge area of {0} in² exceeds the required area of {1} in², indicating that the current PRV setup is adequately sized to handle the expected flow rate safely.";
             public string InadequateSizeMessage { get; set; } = "Warning: The available discharge area of {0} in² is less than the required area of {1} in². The current PRV setup may not be adequately sized to handle the expected flow rate safely.";

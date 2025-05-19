@@ -106,7 +106,10 @@
                         else if (ViewModel.CalculationPerformed)
                         {
                             <div>
-                                <!-- TODO: Add comparison-->
+                                @if (ViewModel.Reynolds != string.Empty) {
+                                    <h5>@ViewModel.Reynolds</h5>
+                                }
+
                                 <h5>@ViewModel.StringResources.Results.RequiredAreaPrefix 
                                     @ViewModel.RequiredArea.ToString("F2") 
                                     @ViewModel.StringResources.Results.RequiredAreaSuffix</h5>
