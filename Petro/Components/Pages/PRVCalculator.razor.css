@@ -89,6 +89,12 @@
     color: var(--brd-dark);
 }
 
+.required-field {
+    color: var(--status-red);
+    margin-left: 2px;
+    font-weight: bold;
+}
+
 /* Remove spinner buttons from number inputs */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

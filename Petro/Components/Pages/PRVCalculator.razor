@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="maxPumpRate" class="modern-label">@ViewModel.StringResources.InputParameters.MaxPumpRate</label>
+                        <label for="maxPumpRate" class="modern-label">@ViewModel.StringResources.InputParameters.MaxPumpRate<span class="required-field">*</span></label>
                         <input type="number"
                         class="modern-input @(ViewModel.MaxPumpRate == 0 ? "default-value" : "")"
                         id="maxPumpRate"
@@ -32,7 +32,7 @@
                     <MudWeightInputs ViewModel="ViewModel" />
 
                     <div class="mb-4">
-                        <label for="prvSetting" class="modern-label">@ViewModel.StringResources.InputParameters.PrvSetting</label>
+                        <label for="prvSetting" class="modern-label">@ViewModel.StringResources.InputParameters.PrvSetting<span class="required-field">*</span></label>
                         <input type="number"
                                class="modern-input @(ViewModel.PrvSetting == 0 ? "default-value" : "")"
                                id="prvSetting"
@@ -48,7 +48,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="capacityCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CapacityCorrectionFactor</label>
+                        <label for="capacityCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CapacityCorrectionFactor<span class="required-field">*</span></label>
                         <input type="number"
                         class="modern-input @(ViewModel.CapacityCorrectionFactor == 0 ? "default-value" : "")"
                         id="capacityCorrectionFactor"
@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="coefficientOfDischarge" class="modern-label">@ViewModel.StringResources.InputParameters.CoefficientOfDischarge</label>
+                        <label for="coefficientOfDischarge" class="modern-label">@ViewModel.StringResources.InputParameters.CoefficientOfDischarge<span class="required-field">*</span></label>
                         <input type="number"
                         class="modern-input @(ViewModel.CoefficientOfDischarge == 0 ? "default-value" : "")"
                         id="coefficientOfDischarge"
@@ -66,7 +66,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="combinationCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CombinationCorrectionFactor</label>
+                        <label for="combinationCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CombinationCorrectionFactor<span class="required-field">*</span></label>
                         <input type="number"
                                class="modern-input @(ViewModel.CombinationCorrectionFactor == 0 ? "default-value" : "")"
                                id="combinationCorrectionFactor"

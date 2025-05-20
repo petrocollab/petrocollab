@@ -7,7 +7,7 @@
         <div class="mb-4">
             @if (i == 0)
             {
-                <label for="mudWeight0" class="modern-label">@ViewModel.StringResources.InputParameters.MudWeight</label>
+                <label for="mudWeight0" class="modern-label">@ViewModel.StringResources.InputParameters.MudWeight<span class="required-field">*</span></label>
                 <div class="d-flex align-items-center">
                     <input type="number"
                            class="modern-input flex-grow-1 @(ViewModel.MudWeights[0] == 0 ? "default-value" : "")"
