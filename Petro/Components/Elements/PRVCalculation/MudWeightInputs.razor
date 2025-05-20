@@ -9,12 +9,6 @@
             {
                 <label for="mudWeight0" class="modern-label">@ViewModel.StringResources.InputParameters.MudWeight</label>
                 <div class="d-flex align-items-center">
-                    @if (ViewModel.MudWeights.Count > 1)
-                    {
-                        <button type="button" class="btn btn-danger mr-2" @onclick="() => DeleteMudWeight(index)">
-                            <span>×</span>
-                        </button>
-                    }
                     <input type="number"
                            class="modern-input flex-grow-1 @(ViewModel.MudWeights[0] == 0 ? "default-value" : "")"
                            id="mudWeight0"
@@ -23,17 +17,18 @@
                            step="0.01"
                            min="0"
                             />
+                    @if (ViewModel.MudWeights.Count > 1)
+                    {
+
+                        <button type="button" class="btn-remove" @onclick="() => DeleteMudWeight(index)">
+                            <span class="bi-x-icon"></span>
+                        </button>
+                    }
                 </div>
             }
             else
             {
                 <div class="d-flex align-items-center">
-                    @if (ViewModel.MudWeights.Count > 1)
-                    {
-                        <button type="button" class="btn btn-danger mr-2" @onclick="() => DeleteMudWeight(index)">
-                            <span>×</span>
-                        </button>
-                    }
                     <input type="number"
                            class="modern-input flex-grow-1 @(ViewModel.MudWeights[index] == 0 ? "default-value" : "")"
                            id="mudWeight@(index)"
@@ -42,6 +37,12 @@
                            step="0.01"
                            min="0"
                             />
+                    @if (ViewModel.MudWeights.Count > 1)
+                    {
+                        <button type="button" class="btn-remove" @onclick="() => DeleteMudWeight(index)">
+                            <span class="bi-x-icon"></span>
+                        </button>
+                    }
                 </div>
             }
         </div>
@@ -50,7 +51,7 @@
     @if (ViewModel.MudWeights.Count < 5)
     {
         <div class="mb-4">
-            <button type="button" class="btn btn-secondary" @onclick="ViewModel.AddMudWeight">
+            <button type="button" class="btn-add" @onclick="ViewModel.AddMudWeight">
                 @ViewModel.StringResources.InputParameters.AddMudWeight
             </button>
         </div>
