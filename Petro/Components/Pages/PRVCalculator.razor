@@ -15,9 +15,9 @@
                     <div class="mb-4">
                         <label for="availableArea" class="modern-label">@ViewModel.StringResources.InputParameters.AvailableArea</label>
                         <input type="number"
-                               class="modern-input @(ViewModel.AvailableArea == 0 ? "default-value" : "")"
-                               id="availableArea"
-                               @bind="ViewModel.AvailableArea" />
+                        class="modern-input @(ViewModel.AvailableArea == 0 ? "default-value" : "")"
+                        id="availableArea"
+                        @bind="ViewModel.AvailableArea" />
                     </div>
 
                     <div class="mb-4">
@@ -34,17 +34,17 @@
                     <div class="mb-4">
                         <label for="prvSetting" class="modern-label">@ViewModel.StringResources.InputParameters.PrvSetting<span class="required-field">*</span></label>
                         <input type="number"
-                               class="modern-input @(ViewModel.PrvSetting == 0 ? "default-value" : "")"
-                               id="prvSetting"
-                               @bind="ViewModel.PrvSetting" />
+                        class="modern-input @(ViewModel.PrvSetting == 0 ? "default-value" : "")"
+                        id="prvSetting"
+                        @bind="ViewModel.PrvSetting" />
                     </div>
 
                     <div class="mb-4">
                         <label for="maxHydrostaticBackpressure" class="modern-label">@ViewModel.StringResources.InputParameters.MaxHydrostaticBackpressure</label>
                         <input type="number"
-                               class="modern-input @(ViewModel.MaxHydrostaticBackpressure == 0 ? "default-value" : "")"
-                               id="maxHydrostaticBackpressure"
-                               @bind="ViewModel.MaxHydrostaticBackpressure" />
+                        class="modern-input @(ViewModel.MaxHydrostaticBackpressure == 0 ? "default-value" : "")"
+                        id="maxHydrostaticBackpressure"
+                        @bind="ViewModel.MaxHydrostaticBackpressure" />
                     </div>
 
                     <div class="mb-4">
@@ -68,25 +68,25 @@
                     <div class="mb-4">
                         <label for="combinationCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CombinationCorrectionFactor<span class="required-field">*</span></label>
                         <input type="number"
-                               class="modern-input @(ViewModel.CombinationCorrectionFactor == 0 ? "default-value" : "")"
-                               id="combinationCorrectionFactor"
-                               @bind="ViewModel.CombinationCorrectionFactor"
+                        class="modern-input @(ViewModel.CombinationCorrectionFactor == 0 ? "default-value" : "")"
+                        id="combinationCorrectionFactor"
+                        @bind="ViewModel.CombinationCorrectionFactor"
                         placeholder="0" />
                     </div>
 
                     <div class="mb-4">
                         <label for="absoluteViscosity" class="modern-label">@ViewModel.StringResources.InputParameters.AbsoluteViscosity</label>
                         <input type="number"
-                               class="modern-input @(ViewModel.AbsoluteViscosity == 0 ? "default-value" : "")"
-                               id="absoluteViscosity"
-                               @bind="ViewModel.AbsoluteViscosity"
-                                />
+                        class="modern-input @(ViewModel.AbsoluteViscosity == 0 ? "default-value" : "")"
+                        id="absoluteViscosity"
+                        @bind="ViewModel.AbsoluteViscosity"
+                        />
                     </div>
 
                     <div class="mb-4">
                         <button class="btn-calculate" 
                         @onclick="ViewModel.CalculateRequiredArea">
-                        @ViewModel.StringResources.InputParameters.CalculateButton</button>
+                            @ViewModel.StringResources.InputParameters.CalculateButton</button>
                     </div>
                 </div>
             </div>
@@ -98,35 +98,45 @@
             <div class="card">
                 <h4>@ViewModel.StringResources.Results.Title</h4>
                 <div class="card-body">
-                    <div class="alert @(ViewModel.HasError ? "alert-danger" : "alert-info")">
-                        @if (ViewModel.HasError)
+                    @if (ViewModel.CalculationPerformed)
+                    {
+                        @if (ViewModel.Reynolds != string.Empty)
                         {
-                            <span>@ViewModel.ErrorMessage</span>
+                            <h5>@ViewModel.Reynolds</h5>
                         }
-                        else if (ViewModel.CalculationPerformed)
+
+                        <h5>
+                            @ViewModel.StringResources.Results.RequiredAreaPrefix
+                            @ViewModel.RequiredArea.ToString("F2")
+                            @ViewModel.StringResources.Results.RequiredAreaSuffix
+                        </h5>
+
+                        @if (ViewModel.HasAreaComparison)
                         {
-                            <div>
-                                @if (ViewModel.Reynolds != string.Empty) {
-                                    <h5>@ViewModel.Reynolds</h5>
-                                }
-
-                                <h5>@ViewModel.StringResources.Results.RequiredAreaPrefix 
-                                    @ViewModel.RequiredArea.ToString("F2") 
-                                    @ViewModel.StringResources.Results.RequiredAreaSuffix</h5>
-
-                                @if (ViewModel.HasAreaComparison)
-                                {
-                                    <div class="@(ViewModel.IsAreaAdequate ? "alert alert-success" : "alert alert-warning") mt-3">
-                                        <p>@ViewModel.AreaComparisonMessage</p>
-                                    </div>
-                                }
+                            <div class="alert @(ViewModel.IsAreaAdequate ? "alert-success" : "alert-warning") mt-3">
+                                <div class="alert-icon"></div>
+                                <div class="alert-content">
+                                    <p>@ViewModel.AreaComparisonMessage</p>
+                                </div>
                             </div>
                         }
-                        else
-                        {
-                            <span>@ViewModel.StringResources.Results.DefaultMessage</span>
-                        }
-                    </div>
+                    }
+                    else 
+                    {
+                        <div class="alert @(ViewModel.HasError ? "alert-danger" : "alert-info")">
+                            <div class="alert-icon"></div>
+                            <div class="alert-content">
+                                @if (ViewModel.HasError)
+                                {
+                                    <span>@ViewModel.ErrorMessage</span>
+                                }
+                                else
+                                {
+                                    <span>@ViewModel.StringResources.Results.DefaultMessage</span>
+                                }
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
