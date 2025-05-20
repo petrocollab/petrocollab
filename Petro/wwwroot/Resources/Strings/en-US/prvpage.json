@@ -8,7 +8,7 @@
         "CapacityCorrectionFactor": "Capacity Correction Factor (Kw)",
         "CoefficientOfDischarge": "Coefficient of Discharge (Kd)",
         "ViscosityCorrectionFactor": "Viscosity Correction Factor (Kv)",
-        "AbsoluteViscosity": "Absolute viscosity at the flowing temperature, centipoise (µ)",
+        "AbsoluteViscosity": "Absolute viscosity (µ)",
         "CombinationCorrectionFactor": "Combination Correction Factor (Kc)",
         "PrvSetting": "PRV Setting (Set Point)",
         "MaxHydrostaticBackpressure": "Max Hydrostatic Backpressure (psi)",
