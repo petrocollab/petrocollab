@@ -8,6 +8,19 @@
     --primary-dark-30: #66A9864D;
     /* Secondary colors */
     /* Status colors */
+    --status-red: #dc3545;
+    --status-error-main: #842029;
+    --status-error-background: #f8d7da;
+    --status-error-border: #f5c2c7;
+    --status-success-main: #0f5132;
+    --status-success-background: #d1e7dd;
+    --status-success-border: #badbcc;
+    --status-warning-main: #664d03;
+    --status-warning-background: #fff3cd;
+    --status-warning-border: #ffecb5;
+    --status-info-main: #055160;
+    --status-info-background: #cff4fc;
+    --status-info-border: #b6effb;
     /* Text colors */
     --text-primary: #333333;
     --text-secondary: #444444;

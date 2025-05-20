@@ -13,7 +13,15 @@
                 <h4>@ViewModel.StringResources.InputParameters.Title</h4>
                 <div class="card-body">
                     <div class="mb-4">
-                        <label for="maxPumpRate" class="modern-label">@ViewModel.StringResources.InputParameters.MaxPumpRate</label>
+                        <label for="availableArea" class="modern-label">@ViewModel.StringResources.InputParameters.AvailableArea</label>
+                        <input type="number"
+                        class="modern-input @(ViewModel.AvailableArea == 0 ? "default-value" : "")"
+                        id="availableArea"
+                        @bind="ViewModel.AvailableArea" />
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="maxPumpRate" class="modern-label">@ViewModel.StringResources.InputParameters.MaxPumpRate<span class="required-field">*</span></label>
                         <input type="number"
                         class="modern-input @(ViewModel.MaxPumpRate == 0 ? "default-value" : "")"
                         id="maxPumpRate"
@@ -24,23 +32,23 @@
                     <MudWeightInputs ViewModel="ViewModel" />
 
                     <div class="mb-4">
-                        <label for="prvSetting" class="modern-label">@ViewModel.StringResources.InputParameters.PrvSetting</label>
+                        <label for="prvSetting" class="modern-label">@ViewModel.StringResources.InputParameters.PrvSetting<span class="required-field">*</span></label>
                         <input type="number"
-                               class="modern-input @(ViewModel.PrvSetting == 0 ? "default-value" : "")"
-                               id="prvSetting"
-                               @bind="ViewModel.PrvSetting" />
+                        class="modern-input @(ViewModel.PrvSetting == 0 ? "default-value" : "")"
+                        id="prvSetting"
+                        @bind="ViewModel.PrvSetting" />
                     </div>
 
                     <div class="mb-4">
                         <label for="maxHydrostaticBackpressure" class="modern-label">@ViewModel.StringResources.InputParameters.MaxHydrostaticBackpressure</label>
                         <input type="number"
-                               class="modern-input @(ViewModel.MaxHydrostaticBackpressure == 0 ? "default-value" : "")"
-                               id="maxHydrostaticBackpressure"
-                               @bind="ViewModel.MaxHydrostaticBackpressure" />
+                        class="modern-input @(ViewModel.MaxHydrostaticBackpressure == 0 ? "default-value" : "")"
+                        id="maxHydrostaticBackpressure"
+                        @bind="ViewModel.MaxHydrostaticBackpressure" />
                     </div>
 
                     <div class="mb-4">
-                        <label for="capacityCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CapacityCorrectionFactor</label>
+                        <label for="capacityCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CapacityCorrectionFactor<span class="required-field">*</span></label>
                         <input type="number"
                         class="modern-input @(ViewModel.CapacityCorrectionFactor == 0 ? "default-value" : "")"
                         id="capacityCorrectionFactor"
@@ -49,7 +57,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="coefficientOfDischarge" class="modern-label">@ViewModel.StringResources.InputParameters.CoefficientOfDischarge</label>
+                        <label for="coefficientOfDischarge" class="modern-label">@ViewModel.StringResources.InputParameters.CoefficientOfDischarge<span class="required-field">*</span></label>
                         <input type="number"
                         class="modern-input @(ViewModel.CoefficientOfDischarge == 0 ? "default-value" : "")"
                         id="coefficientOfDischarge"
@@ -58,17 +66,27 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="viscosityCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.ViscosityCorrectionFactor</label>
+                        <label for="combinationCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CombinationCorrectionFactor<span class="required-field">*</span></label>
                         <input type="number"
-                        class="modern-input @(ViewModel.ViscosityCorrectionFactor == 0 ? "default-value" : "")"
-                        id="viscosityCorrectionFactor"
-                        @bind="ViewModel.ViscosityCorrectionFactor"
+                        class="modern-input @(ViewModel.CombinationCorrectionFactor == 0 ? "default-value" : "")"
+                        id="combinationCorrectionFactor"
+                        @bind="ViewModel.CombinationCorrectionFactor"
                         placeholder="0" />
                     </div>
 
                     <div class="mb-4">
+                        <label for="absoluteViscosity" class="modern-label">@ViewModel.StringResources.InputParameters.AbsoluteViscosity</label>
+                        <input type="number"
+                        class="modern-input @(ViewModel.AbsoluteViscosity == 0 ? "default-value" : "")"
+                        id="absoluteViscosity"
+                        @bind="ViewModel.AbsoluteViscosity"
+                        />
+                    </div>
 
-                        <button class="btn-calculate" @onclick="ViewModel.CalculateRequiredArea">@ViewModel.StringResources.InputParameters.CalculateButton</button>
+                    <div class="mb-4">
+                        <button class="btn-calculate" 
+                        @onclick="ViewModel.CalculateRequiredArea">
+                            @ViewModel.StringResources.InputParameters.CalculateButton</button>
                     </div>
                 </div>
             </div>
@@ -80,23 +98,45 @@
             <div class="card">
                 <h4>@ViewModel.StringResources.Results.Title</h4>
                 <div class="card-body">
-                    <div class="alert @(ViewModel.HasError ? "alert-danger" : "alert-info")">
-                        @if (ViewModel.HasError)
+                    @if (ViewModel.CalculationPerformed)
+                    {
+                        @if (ViewModel.Reynolds != string.Empty)
                         {
-                            <span>@ViewModel.ErrorMessage</span>
+                            <h5>@ViewModel.Reynolds</h5>
                         }
-                        else if (ViewModel.CalculationPerformed)
+
+                        <h5>
+                            @ViewModel.StringResources.Results.RequiredAreaPrefix
+                            @ViewModel.RequiredArea.ToString("F2")
+                            @ViewModel.StringResources.Results.RequiredAreaSuffix
+                        </h5>
+
+                        @if (ViewModel.HasAreaComparison)
                         {
-                            <div>
-                                <h5>@ViewModel.StringResources.Results.RequiredAreaPrefix @ViewModel.RequiredArea.ToString("F6") @ViewModel.StringResources.Results.RequiredAreaSuffix</h5>
-                                <p>@ViewModel.StringResources.Results.OverPressurePrvLabel @ViewModel.OverPressurePrv</p>
+                            <div class="alert @(ViewModel.IsAreaAdequate ? "alert-success" : "alert-warning") mt-3">
+                                <div class="alert-icon"></div>
+                                <div class="alert-content">
+                                    <p>@ViewModel.AreaComparisonMessage</p>
+                                </div>
                             </div>
                         }
-                        else
-                        {
-                            <span>@ViewModel.StringResources.Results.DefaultMessage</span>
-                        }
-                    </div>
+                    }
+                    else 
+                    {
+                        <div class="alert @(ViewModel.HasError ? "alert-error" : "alert-info")">
+                            <div class="alert-icon"></div>
+                            <div class="alert-content">
+                                @if (ViewModel.HasError)
+                                {
+                                    <span>@ViewModel.ErrorMessage</span>
+                                }
+                                else
+                                {
+                                    <span>@ViewModel.StringResources.Results.DefaultMessage</span>
+                                }
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
@@ -120,7 +160,9 @@
                     <li>@ViewModel.StringResources.Formula.Variables.FlowRate</li>
                     <li>@ViewModel.StringResources.Formula.Variables.CoefficientOfDischarge</li>
                     <li>@ViewModel.StringResources.Formula.Variables.CapacityCorrectionFactor</li>
+                    <li>@ViewModel.StringResources.Formula.Variables.CombinationCorrectionFactor</li>
                     <li>@ViewModel.StringResources.Formula.Variables.ViscosityCorrectionFactor</li>
+                    <li>@ViewModel.StringResources.Formula.Variables.AbsoluteViscosity</li>
                     <li>@ViewModel.StringResources.Formula.Variables.SpecificGravity</li>
                     <li>@ViewModel.StringResources.Formula.Variables.SetPressure</li>
                     <li>@ViewModel.StringResources.Formula.Variables.Backpressure</li>

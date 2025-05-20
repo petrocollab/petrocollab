@@ -25,6 +25,16 @@ namespace Petro.ViewModels
             }
         }
 
+        public double? AvailableArea
+        {
+            get => _parameters.AvailableArea;
+            set
+            {
+                _parameters.AvailableArea = value;
+                OnPropertyChanged();
+            }
+        }
+
         public double? MaxPumpRate
         {
             get => _parameters.FlowRate;
@@ -87,12 +97,22 @@ namespace Petro.ViewModels
             }
         }
 
-        public double ViscosityCorrectionFactor
+        public double CombinationCorrectionFactor
         {
-            get => _parameters.ViscosityCorrectionFactor;
+            get => _parameters.CombinationCorrectionFactor;
             set
             {
-                _parameters.ViscosityCorrectionFactor = value;
+                _parameters.CombinationCorrectionFactor = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double? AbsoluteViscosity
+        {
+            get => _parameters.AbsoluteViscosity;
+            set
+            {
+                _parameters.AbsoluteViscosity = value;
                 OnPropertyChanged();
             }
         }
@@ -119,7 +139,10 @@ namespace Petro.ViewModels
 
         // Output properties
         public double RequiredArea { get; private set; }
-        public double OverPressurePrv { get; private set; }
+        public string AreaComparisonMessage { get; private set; }
+        public string Reynolds { get; private set; } = string.Empty;
+        public bool IsAreaAdequate { get; private set; }
+        public bool HasAreaComparison => AvailableArea.HasValue && AvailableArea > 0 && CalculationPerformed;
 
         // UI state
         public bool CalculationPerformed { get; private set; }
@@ -159,34 +182,62 @@ namespace Petro.ViewModels
                 if (result.Success)
                 {
                     RequiredArea = result.RequiredArea;
-                    OverPressurePrv = result.OverPressurePrv;
                     CalculationPerformed = true;
                     HasError = false;
                     ErrorMessage = string.Empty;
+                    Reynolds = string.Empty;
+
+                    if (result.r > 0)
+                    {
+                        Reynolds = StringResources.Results.Reynolds + result.r.ToString("F0");
+                    }
+
+                    // Compare Required Area with Available Area if provided
+                    if (AvailableArea.HasValue && AvailableArea > 0)
+                    {
+                        IsAreaAdequate = AvailableArea.Value >= RequiredArea;
+                        // Format the message with values
+                        AreaComparisonMessage = string.Format(
+                            IsAreaAdequate
+                                ? StringResources.Results.AdequateSizeMessage
+                                : StringResources.Results.InadequateSizeMessage,
+                            AvailableArea.Value.ToString("F2"),
+                            RequiredArea.ToString("F2"));
+                    }
+                    else
+                    {
+                        AreaComparisonMessage = string.Empty;
+                    }
                 }
                 else
                 {
                     HasError = true;
                     ErrorMessage = result.ErrorMessage;
                     CalculationPerformed = false;
+                    AreaComparisonMessage = string.Empty;
                 }
 
                 // Notify UI of changes
                 OnPropertyChanged(nameof(RequiredArea));
-                OnPropertyChanged(nameof(OverPressurePrv));
                 OnPropertyChanged(nameof(HasError));
                 OnPropertyChanged(nameof(ErrorMessage));
                 OnPropertyChanged(nameof(CalculationPerformed));
+                OnPropertyChanged(nameof(AreaComparisonMessage));
+                OnPropertyChanged(nameof(IsAreaAdequate));
+                OnPropertyChanged(nameof(HasAreaComparison));
             }
             catch (Exception ex)
             {
                 HasError = true;
                 ErrorMessage = $"Error in calculation: {ex.Message}";
                 CalculationPerformed = false;
+                AreaComparisonMessage = string.Empty;
 
                 OnPropertyChanged(nameof(HasError));
                 OnPropertyChanged(nameof(ErrorMessage));
                 OnPropertyChanged(nameof(CalculationPerformed));
+                OnPropertyChanged(nameof(AreaComparisonMessage));
+                OnPropertyChanged(nameof(HasAreaComparison));
             }
         }
 
