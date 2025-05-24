@@ -9,88 +9,101 @@
 
     <div class="top-row">
         <div class="column">
-            
+                <h4>@ViewModel.StringResources.InputParameters.Title</h4>
+            <div class="settings-row">
+                <div class="column">
+                    <!--First Column-->
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <label for="availableArea" class="modern-label">@ViewModel.StringResources.InputParameters.AvailableArea</label>
+                            <input type="number"
+                                   class="modern-input @(ViewModel.AvailableArea == 0 ? "default-value" : "")"
+                                   id="availableArea"
+                                   @bind="ViewModel.AvailableArea" />
+                        </div>
 
+                        <div class="mb-4">
+                            <label for="maxPumpRate" class="modern-label">@ViewModel.StringResources.InputParameters.MaxPumpRate<span class="required-field">*</span></label>
+                            <input type="number"
+                                   class="modern-input @(ViewModel.MaxPumpRate == 0 ? "default-value" : "")"
+                                   id="maxPumpRate"
+                                   @bind="ViewModel.MaxPumpRate" />
+                        </div>
+
+                        <MudWeightInputs ViewModel="ViewModel" />
+
+                        <div class="mb-4">
+                            <label for="prvSetting" class="modern-label">@ViewModel.StringResources.InputParameters.PrvSetting<span class="required-field">*</span></label>
+                            <input type="number"
+                                   class="modern-input @(ViewModel.PrvSetting == 0 ? "default-value" : "")"
+                                   id="prvSetting"
+                                   @bind="ViewModel.PrvSetting" />
+                        </div>
+
+                       
+                        <div class="mb-4">
+                            <button class="btn-calculate"
+                                    @onclick="ViewModel.CalculateRequiredArea">
+                                @ViewModel.StringResources.InputParameters.CalculateButton
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <!--Second Column-->
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <label for="capacityCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CapacityCorrectionFactor<span class="required-field">*</span></label>
+                            <input type="number"
+                                   class="modern-input @(ViewModel.CapacityCorrectionFactor == 0 ? "default-value" : "")"
+                                   id="capacityCorrectionFactor"
+                                   @bind="ViewModel.CapacityCorrectionFactor"
+                                   placeholder="0" />
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="coefficientOfDischarge" class="modern-label">@ViewModel.StringResources.InputParameters.CoefficientOfDischarge<span class="required-field">*</span></label>
+                            <input type="number"
+                                   class="modern-input @(ViewModel.CoefficientOfDischarge == 0 ? "default-value" : "")"
+                                   id="coefficientOfDischarge"
+                                   @bind="ViewModel.CoefficientOfDischarge"
+                                   placeholder="0" />
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="combinationCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CombinationCorrectionFactor<span class="required-field">*</span></label>
+                            <input type="number"
+                                   class="modern-input @(ViewModel.CombinationCorrectionFactor == 0 ? "default-value" : "")"
+                                   id="combinationCorrectionFactor"
+                                   @bind="ViewModel.CombinationCorrectionFactor"
+                                   placeholder="0" />
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="absoluteViscosity" class="modern-label">@ViewModel.StringResources.InputParameters.AbsoluteViscosity</label>
+                            <input type="number"
+                                   class="modern-input @(ViewModel.AbsoluteViscosity == 0 ? "default-value" : "")"
+                                   id="absoluteViscosity"
+                                   @bind="ViewModel.AbsoluteViscosity" />
+                        </div>
+                        <div class="mb-4">
+                            <label for="maxHydrostaticBackpressure" class="modern-label">@ViewModel.StringResources.InputParameters.MaxHydrostaticBackpressure</label>
+                            <input type="number"
+                                   class="modern-input @(ViewModel.MaxHydrostaticBackpressure == 0 ? "default-value" : "")"
+                                   id="maxHydrostaticBackpressure"
+                                   @bind="ViewModel.MaxHydrostaticBackpressure" />
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
             <!-- Input Parameters -->
             <div class="card">
-                <h4>@ViewModel.StringResources.InputParameters.Title</h4>
+                
                 <div class="card-body">
-                    <div class="mb-4">
-                        <label for="availableArea" class="modern-label">@ViewModel.StringResources.InputParameters.AvailableArea</label>
-                        <input type="number"
-                        class="modern-input @(ViewModel.AvailableArea == 0 ? "default-value" : "")"
-                        id="availableArea"
-                        @bind="ViewModel.AvailableArea" />
-                    </div>
+                    
 
-                    <div class="mb-4">
-                        <label for="maxPumpRate" class="modern-label">@ViewModel.StringResources.InputParameters.MaxPumpRate<span class="required-field">*</span></label>
-                        <input type="number"
-                        class="modern-input @(ViewModel.MaxPumpRate == 0 ? "default-value" : "")"
-                        id="maxPumpRate"
-                        @bind="ViewModel.MaxPumpRate"
-                        />
-                    </div>
-
-                    <MudWeightInputs ViewModel="ViewModel" />
-
-                    <div class="mb-4">
-                        <label for="prvSetting" class="modern-label">@ViewModel.StringResources.InputParameters.PrvSetting<span class="required-field">*</span></label>
-                        <input type="number"
-                        class="modern-input @(ViewModel.PrvSetting == 0 ? "default-value" : "")"
-                        id="prvSetting"
-                        @bind="ViewModel.PrvSetting" />
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="maxHydrostaticBackpressure" class="modern-label">@ViewModel.StringResources.InputParameters.MaxHydrostaticBackpressure</label>
-                        <input type="number"
-                        class="modern-input @(ViewModel.MaxHydrostaticBackpressure == 0 ? "default-value" : "")"
-                        id="maxHydrostaticBackpressure"
-                        @bind="ViewModel.MaxHydrostaticBackpressure" />
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="capacityCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CapacityCorrectionFactor<span class="required-field">*</span></label>
-                        <input type="number"
-                        class="modern-input @(ViewModel.CapacityCorrectionFactor == 0 ? "default-value" : "")"
-                        id="capacityCorrectionFactor"
-                        @bind="ViewModel.CapacityCorrectionFactor"
-                        placeholder="0" />
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="coefficientOfDischarge" class="modern-label">@ViewModel.StringResources.InputParameters.CoefficientOfDischarge<span class="required-field">*</span></label>
-                        <input type="number"
-                        class="modern-input @(ViewModel.CoefficientOfDischarge == 0 ? "default-value" : "")"
-                        id="coefficientOfDischarge"
-                        @bind="ViewModel.CoefficientOfDischarge"
-                        placeholder="0" />
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="combinationCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CombinationCorrectionFactor<span class="required-field">*</span></label>
-                        <input type="number"
-                        class="modern-input @(ViewModel.CombinationCorrectionFactor == 0 ? "default-value" : "")"
-                        id="combinationCorrectionFactor"
-                        @bind="ViewModel.CombinationCorrectionFactor"
-                        placeholder="0" />
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="absoluteViscosity" class="modern-label">@ViewModel.StringResources.InputParameters.AbsoluteViscosity</label>
-                        <input type="number"
-                        class="modern-input @(ViewModel.AbsoluteViscosity == 0 ? "default-value" : "")"
-                        id="absoluteViscosity"
-                        @bind="ViewModel.AbsoluteViscosity"
-                        />
-                    </div>
-
-                    <div class="mb-4">
-                        <button class="btn-calculate" 
-                        @onclick="ViewModel.CalculateRequiredArea">
-                            @ViewModel.StringResources.InputParameters.CalculateButton</button>
-                    </div>
+                    
                 </div>
             </div>
 
