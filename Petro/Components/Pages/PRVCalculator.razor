@@ -9,87 +9,173 @@
 
     <div class="top-row">
         <div class="column">
-            <div class="card">
-                <h4>@ViewModel.StringResources.InputParameters.Title</h4>
-                <div class="card-body">
-                    <div class="mb-4">
-                        <label for="availableArea" class="modern-label">@ViewModel.StringResources.InputParameters.AvailableArea</label>
-                        <input type="number"
-                        class="modern-input @(ViewModel.AvailableArea == 0 ? "default-value" : "")"
-                        id="availableArea"
-                        @bind="ViewModel.AvailableArea" />
+            <!-- Input Parameters -->
+            <h4>@ViewModel.StringResources.InputParameters.Title</h4>
+            <div class="input-row">
+                <div class="column">
+                    <!--First Column-->
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <label for="availableArea" class="modern-label">@ViewModel.StringResources.InputParameters.AvailableArea</label>
+                            <input type="number"
+                                   class="modern-input @(ViewModel.AvailableArea == 0 ? "default-value" : "")"
+                                   id="availableArea"
+                                   @bind="ViewModel.AvailableArea" />
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="maxPumpRate" class="modern-label">@ViewModel.StringResources.InputParameters.MaxPumpRate<span class="required-field">*</span></label>
+                            <input type="number"
+                                   class="modern-input @(ViewModel.MaxPumpRate == 0 ? "default-value" : "")"
+                                   id="maxPumpRate"
+                                   @bind="ViewModel.MaxPumpRate" />
+                        </div>
+
+                        <MudWeightInputs ViewModel="ViewModel" />
+
+                        <div class="mb-4">
+                            <label for="prvSetting" class="modern-label">@ViewModel.StringResources.InputParameters.PrvSetting<span class="required-field">*</span></label>
+                            <input type="number"
+                                   class="modern-input @(ViewModel.PrvSetting == 0 ? "default-value" : "")"
+                                   id="prvSetting"
+                                   @bind="ViewModel.PrvSetting" />
+                        </div>
+
+                       
+                        <div class="mb-4">
+                            <button class="btn-calculate"
+                                    @onclick="ViewModel.CalculateRequiredArea">
+                                @ViewModel.StringResources.InputParameters.CalculateButton
+                            </button>
+                        </div>
                     </div>
+                </div>
+                <div class="column">
+                    <!--Second Column-->
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <label for="capacityCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CapacityCorrectionFactor<span class="required-field">*</span></label>
+                            <input type="number"
+                                   class="modern-input @(ViewModel.CapacityCorrectionFactor == 0 ? "default-value" : "")"
+                                   id="capacityCorrectionFactor"
+                                   @bind="ViewModel.CapacityCorrectionFactor"
+                                   placeholder="0" />
+                        </div>
 
-                    <div class="mb-4">
-                        <label for="maxPumpRate" class="modern-label">@ViewModel.StringResources.InputParameters.MaxPumpRate<span class="required-field">*</span></label>
-                        <input type="number"
-                        class="modern-input @(ViewModel.MaxPumpRate == 0 ? "default-value" : "")"
-                        id="maxPumpRate"
-                        @bind="ViewModel.MaxPumpRate"
-                        />
-                    </div>
+                        <div class="mb-4">
+                            <label for="coefficientOfDischarge" class="modern-label">@ViewModel.StringResources.InputParameters.CoefficientOfDischarge<span class="required-field">*</span></label>
+                            <input type="number"
+                                   class="modern-input @(ViewModel.CoefficientOfDischarge == 0 ? "default-value" : "")"
+                                   id="coefficientOfDischarge"
+                                   @bind="ViewModel.CoefficientOfDischarge"
+                                   placeholder="0" />
+                        </div>
 
-                    <MudWeightInputs ViewModel="ViewModel" />
+                        <div class="mb-4">
+                            <label for="combinationCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CombinationCorrectionFactor<span class="required-field">*</span></label>
+                            <input type="number"
+                                   class="modern-input @(ViewModel.CombinationCorrectionFactor == 0 ? "default-value" : "")"
+                                   id="combinationCorrectionFactor"
+                                   @bind="ViewModel.CombinationCorrectionFactor"
+                                   placeholder="0" />
+                        </div>
 
-                    <div class="mb-4">
-                        <label for="prvSetting" class="modern-label">@ViewModel.StringResources.InputParameters.PrvSetting<span class="required-field">*</span></label>
-                        <input type="number"
-                        class="modern-input @(ViewModel.PrvSetting == 0 ? "default-value" : "")"
-                        id="prvSetting"
-                        @bind="ViewModel.PrvSetting" />
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="maxHydrostaticBackpressure" class="modern-label">@ViewModel.StringResources.InputParameters.MaxHydrostaticBackpressure</label>
-                        <input type="number"
-                        class="modern-input @(ViewModel.MaxHydrostaticBackpressure == 0 ? "default-value" : "")"
-                        id="maxHydrostaticBackpressure"
-                        @bind="ViewModel.MaxHydrostaticBackpressure" />
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="capacityCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CapacityCorrectionFactor<span class="required-field">*</span></label>
-                        <input type="number"
-                        class="modern-input @(ViewModel.CapacityCorrectionFactor == 0 ? "default-value" : "")"
-                        id="capacityCorrectionFactor"
-                        @bind="ViewModel.CapacityCorrectionFactor"
-                        placeholder="0" />
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="coefficientOfDischarge" class="modern-label">@ViewModel.StringResources.InputParameters.CoefficientOfDischarge<span class="required-field">*</span></label>
-                        <input type="number"
-                        class="modern-input @(ViewModel.CoefficientOfDischarge == 0 ? "default-value" : "")"
-                        id="coefficientOfDischarge"
-                        @bind="ViewModel.CoefficientOfDischarge"
-                        placeholder="0" />
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="combinationCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CombinationCorrectionFactor<span class="required-field">*</span></label>
-                        <input type="number"
-                        class="modern-input @(ViewModel.CombinationCorrectionFactor == 0 ? "default-value" : "")"
-                        id="combinationCorrectionFactor"
-                        @bind="ViewModel.CombinationCorrectionFactor"
-                        placeholder="0" />
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="absoluteViscosity" class="modern-label">@ViewModel.StringResources.InputParameters.AbsoluteViscosity</label>
-                        <input type="number"
-                        class="modern-input @(ViewModel.AbsoluteViscosity == 0 ? "default-value" : "")"
-                        id="absoluteViscosity"
-                        @bind="ViewModel.AbsoluteViscosity"
-                        />
-                    </div>
-
-                    <div class="mb-4">
-                        <button class="btn-calculate" 
-                        @onclick="ViewModel.CalculateRequiredArea">
-                            @ViewModel.StringResources.InputParameters.CalculateButton</button>
+                        <div class="mb-4">
+                            <label for="absoluteViscosity" class="modern-label">@ViewModel.StringResources.InputParameters.AbsoluteViscosity</label>
+                            <input type="number"
+                                   class="modern-input @(ViewModel.AbsoluteViscosity == 0 ? "default-value" : "")"
+                                   id="absoluteViscosity"
+                                   @bind="ViewModel.AbsoluteViscosity" />
+                        </div>
+                        <div class="mb-4">
+                            <label for="maxHydrostaticBackpressure" class="modern-label">@ViewModel.StringResources.InputParameters.MaxHydrostaticBackpressure</label>
+                            <input type="number"
+                                   class="modern-input @(ViewModel.MaxHydrostaticBackpressure == 0 ? "default-value" : "")"
+                                   id="maxHydrostaticBackpressure"
+                                   @bind="ViewModel.MaxHydrostaticBackpressure" />
+                        </div>
+                        
                     </div>
                 </div>
             </div>
+
+            <!-- Settings -->
+            <div class="card">
+                <div class="card-body">
+                    <h4>@ViewModel.StringResources.InputParameters.AdvancedOptions</h4>
+                    <div class="settings-row">
+                        <!-- Settings: First Column -->
+
+                        <div class="settings-column">
+                            <h5>@ViewModel.StringResources.InputParameters.CalculationMode</h5>
+
+                            <div class="radio-group mb-4">
+                                <div class="radio-option">
+                                    <input type="radio"
+                                           id="singleScenario"
+                                           name="calculationMode"
+                                           value="single"
+                                           checked="@(ViewModel.CalculationMode == "single")"
+                                           @onchange="@(() => ViewModel.CalculationMode = "single")" />
+                                    <label for="singleScenario" class="radio-label">
+                                        <span class="radio-title">@ViewModel.StringResources.InputParameters.SingleScenarioTitle</span>
+                                        <p class="radio-description">@ViewModel.StringResources.InputParameters.SingleScenarioDescr</p>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="radio-group mb-4">
+                                <div class="radio-option">
+                                    <input type="radio"
+                                           id="multipleScenario"
+                                           name="calculationMode"
+                                           value="multiple"
+                                           checked="@(ViewModel.CalculationMode == "multiple")"
+                                           @onchange="@(() => ViewModel.CalculationMode = "multiple")" />
+                                    <label for="multipleScenario" class="radio-label">
+                                        <span class="radio-title">@ViewModel.StringResources.InputParameters.MultipleScenarioTitle</span>
+                                        <p class="radio-description">@ViewModel.StringResources.InputParameters.MultipleScenarioDescr</p>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Settings: Second Column -->
+                        <div class="settings-column">
+                            <h5>@ViewModel.StringResources.InputParameters.PRVCertReqTitle</h5>
+
+                            <div class="radio-group mb-4">
+                                <div class="radio-option radio-option-centered">
+                                    <input type="radio"
+                                           id="prvCertTrue"
+                                           name="prvCertification"
+                                           value="true"
+                                           checked="@(ViewModel.PRVCertificationRequired == true)"
+                                           @onchange="@(() => ViewModel.PRVCertificationRequired = true)" />
+                                    <label for="prvCertTrue" class="radio-label">
+                                        <span class="radio-title">@ViewModel.StringResources.InputParameters.PRVCertReqTrue</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="radio-group mb-4">
+                                <div class="radio-option radio-option-centered">
+                                    <input type="radio"
+                                           id="prvCertFalse"
+                                           name="prvCertification"
+                                           value="false"
+                                           checked="@(ViewModel.PRVCertificationRequired == false)"
+                                           @onchange="@(() => ViewModel.PRVCertificationRequired = false)" />
+                                    <label for="prvCertFalse" class="radio-label">
+                                        <span class="radio-title">@ViewModel.StringResources.InputParameters.PRVCertReqFalse</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- Results -->
