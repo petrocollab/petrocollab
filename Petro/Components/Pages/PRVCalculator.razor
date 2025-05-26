@@ -9,8 +9,9 @@
 
     <div class="top-row">
         <div class="column">
-                <h4>@ViewModel.StringResources.InputParameters.Title</h4>
-            <div class="settings-row">
+            <!-- Input Parameters -->
+            <h4>@ViewModel.StringResources.InputParameters.Title</h4>
+            <div class="input-row">
                 <div class="column">
                     <!--First Column-->
                     <div class="card-body">
@@ -97,68 +98,76 @@
                     </div>
                 </div>
             </div>
-            <!-- Input Parameters -->
-            <div class="card">
-                
-                <div class="card-body">
-                    
-
-                    
-                </div>
-            </div>
 
             <!-- Settings -->
             <div class="card">
                 <div class="card-body">
-                    <h4>Advances Options</h4>
+                    <h4>@ViewModel.StringResources.InputParameters.AdvancedOptions</h4>
                     <div class="settings-row">
-                        <!-- First Column -->
-                        <div class="settings-column">
-                            <h5>Calculation Options</h5>
+                        <!-- Settings: First Column -->
 
-                            <div class="toggle-group mb-4">
-                                <div class="toggle-header">
-                                    <span class="toggle-title">Auto Calculate</span>
-                                    <label class="toggle-switch">
-                                        <input type="checkbox" />
-                                        <span class="toggle-slider"></span>
+                        <div class="settings-column">
+                            <h5>@ViewModel.StringResources.InputParameters.CalculationMode</h5>
+
+                            <div class="radio-group mb-4">
+                                <div class="radio-option">
+                                    <input type="radio"
+                                           id="singleScenario"
+                                           name="calculationMode"
+                                           value="single"
+                                           checked="@(ViewModel.CalculationMode == "single")"
+                                           @onchange="@(() => ViewModel.CalculationMode = "single")" />
+                                    <label for="singleScenario" class="radio-label">
+                                        <span class="radio-title">@ViewModel.StringResources.InputParameters.SingleScenarioTitle</span>
+                                        <p class="radio-description">@ViewModel.StringResources.InputParameters.SingleScenarioDescr</p>
                                     </label>
                                 </div>
-                                <p class="toggle-description">Automatically calculate results when input values change.</p>
                             </div>
 
-                            <div class="toggle-group mb-4">
-                                <div class="toggle-header">
-                                    <span class="toggle-title">Show Advanced Fields</span>
-                                    <label class="toggle-switch">
-                                        <input type="checkbox" />
-                                        <span class="toggle-slider"></span>
+                            <div class="radio-group mb-4">
+                                <div class="radio-option">
+                                    <input type="radio"
+                                           id="multipleScenario"
+                                           name="calculationMode"
+                                           value="multiple"
+                                           checked="@(ViewModel.CalculationMode == "multiple")"
+                                           @onchange="@(() => ViewModel.CalculationMode = "multiple")" />
+                                    <label for="multipleScenario" class="radio-label">
+                                        <span class="radio-title">@ViewModel.StringResources.InputParameters.MultipleScenarioTitle</span>
+                                        <p class="radio-description">@ViewModel.StringResources.InputParameters.MultipleScenarioDescr</p>
                                     </label>
                                 </div>
-                                <p class="toggle-description">Display additional technical parameters for detailed calculations.</p>
                             </div>
                         </div>
 
-                        <!-- Second Column -->
+                        <!-- Settings: Second Column -->
                         <div class="settings-column">
-                            <h5>Display Options</h5>
+                            <h5>@ViewModel.StringResources.InputParameters.PRVCertReqTitle</h5>
 
-                            <div class="toggle-group mb-4">
-                                <div class="toggle-header">
-                                    <span class="toggle-title">Show Formula</span>
-                                    <label class="toggle-switch">
-                                        <input type="checkbox" />
-                                        <span class="toggle-slider"></span>
+                            <div class="radio-group mb-4">
+                                <div class="radio-option radio-option-centered">
+                                    <input type="radio"
+                                           id="prvCertTrue"
+                                           name="prvCertification"
+                                           value="true"
+                                           checked="@(ViewModel.PRVCertificationRequired == true)"
+                                           @onchange="@(() => ViewModel.PRVCertificationRequired = true)" />
+                                    <label for="prvCertTrue" class="radio-label">
+                                        <span class="radio-title">@ViewModel.StringResources.InputParameters.PRVCertReqTrue</span>
                                     </label>
                                 </div>
                             </div>
 
-                            <div class="toggle-group mb-4">
-                                <div class="toggle-header">
-                                    <span class="toggle-title">Use Metric Units</span>
-                                    <label class="toggle-switch">
-                                        <input type="checkbox" />
-                                        <span class="toggle-slider"></span>
+                            <div class="radio-group mb-4">
+                                <div class="radio-option radio-option-centered">
+                                    <input type="radio"
+                                           id="prvCertFalse"
+                                           name="prvCertification"
+                                           value="false"
+                                           checked="@(ViewModel.PRVCertificationRequired == false)"
+                                           @onchange="@(() => ViewModel.PRVCertificationRequired = false)" />
+                                    <label for="prvCertFalse" class="radio-label">
+                                        <span class="radio-title">@ViewModel.StringResources.InputParameters.PRVCertReqFalse</span>
                                     </label>
                                 </div>
                             </div>

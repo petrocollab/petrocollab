@@ -26,6 +26,15 @@
             public string MaxHydrostaticBackpressure { get; set; } = "Max Hydrostatic Backpressure (P2)";
             public string CalculateButton { get; set; } = "Calculate";
             public string AddMudWeight { get; set; } = "+ Add Mud Weight";
+            public string AdvancedOptions { get; set; } = "Advanced Options";
+            public string CalculationMode { get; set; } = "Calculation Mode";
+            public string SingleScenarioTitle { get; set; } = "Single Scenario Calculation";
+            public string SingleScenarioDescr { get; set; } = "Use one flow rate and one mud weight.";
+            public string MultipleScenarioTitle { get; set; } = "Multiple Scenario Calculation";
+            public string MultipleScenarioDescr { get; set; } = "Use a range of flow rates and/or mud weights.";
+            public string PRVCertReqTitle { get; set; } = "PRV Certification Requirement";
+            public string PRVCertReqTrue { get; set; } = "Requires Capacity Certification";
+            public string PRVCertReqFalse { get; set; } = "Does Not Require Capacity Certification";
         }
 
         public class ResultsModel

@@ -11,6 +11,9 @@ namespace Petro.ViewModels
         private readonly PRVParemetersModel _parameters = new PRVParemetersModel();
         private readonly IWebHostEnvironment _environment;
 
+        public string CalculationMode { get; set; } = "single"; // Default to single scenario
+        public bool PRVCertificationRequired { get; set; } = false; // Default to false
+
         public PRVStringResourceModel StringResources { get; private set; } = new PRVStringResourceModel();
 
         public PRVCalculationViewModel(IWebHostEnvironment environment)
