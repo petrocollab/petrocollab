@@ -11,7 +11,7 @@ namespace Petro.ViewModels
         private readonly PRVParemetersModel _parameters = new PRVParemetersModel();
         private readonly IWebHostEnvironment _environment;
 
-        public string CalculationMode { get; set; } = "single"; // Default to single scenario
+        private string _calculationMode = "single"; // Default to single scenario
         public bool PRVCertificationRequired { get; set; } = false; // Default to false
 
         public PRVStringResourceModel StringResources { get; private set; } = new PRVStringResourceModel();
@@ -137,6 +137,29 @@ namespace Petro.ViewModels
             {
                 _parameters.MaxHydrostaticBackpressure = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public string CalculationMode
+        {
+            get => _calculationMode;
+            set
+            {
+                if (_calculationMode != value)
+                {
+                    _calculationMode = value;
+
+                    // When switching to single mode, keep only the first mud weight
+                    if (_calculationMode == "single" && _parameters.MudWeights.Count > 1)
+                    {
+                        var firstValue = _parameters.MudWeights.FirstOrDefault();
+                        _parameters.MudWeights.Clear();
+                        _parameters.MudWeights.Add(firstValue);
+                        OnPropertyChanged(nameof(MudWeights));
+                    }
+
+                    OnPropertyChanged();
+                }
             }
         }
 

@@ -85,6 +85,10 @@
         font-weight: 500; /* Make text bold */
     }
 
+.placeholder {
+    margin-bottom: 10px;
+}
+
 /* Remove spinner buttons from number inputs */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
