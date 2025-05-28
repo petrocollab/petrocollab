@@ -2,7 +2,7 @@
   "Title": "PRV Calculator",
   "InputParameters": {
     "Title": "Input Parameters",
-    "MaxPumpRate": "Flow rate (gpm)",
+    "FlowRate": "Flow rate (gpm)",
     "MudWeight": "Mud Weight (sg)",
     "AvailableArea": "Available Discharge Area (in²)",
     "CapacityCorrectionFactor": "Capacity Correction Factor (Kw)",

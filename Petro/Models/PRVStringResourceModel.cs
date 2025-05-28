@@ -13,7 +13,7 @@
         public class InputParametersModel
         {
             public string Title { get; set; } = "Input Parameters";
-            public string MaxPumpRate { get; set; } = "Max Pump Rate (gpm)";
+            public string FlowRate { get; set; } = "Flow Rate (gpm)";
             public string MudWeight { get; set; } = "Mud Weight (sg)";
             public string AvailableArea { get; set; } = "Available Discharge Area (in²)";
             public string CapacityCorrectionFactor { get; set; } = "Capacity Correction Factor (Kw)";

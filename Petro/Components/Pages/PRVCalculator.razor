@@ -24,11 +24,11 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="maxPumpRate" class="modern-label">@ViewModel.StringResources.InputParameters.MaxPumpRate<span class="required-field">*</span></label>
+                            <label for="flowRate" class="modern-label">@ViewModel.StringResources.InputParameters.FlowRate<span class="required-field">*</span></label>
                             <input type="number"
-                                   class="modern-input @(ViewModel.MaxPumpRate == 0 ? "default-value" : "")"
-                                   id="maxPumpRate"
-                                   @bind="ViewModel.MaxPumpRate" />
+                                   class="modern-input @(ViewModel.FlowRate == 0 ? "default-value" : "")"
+                                   id="flowRate"
+                                   @bind="ViewModel.FlowRate" />
                         </div>
 
                         <MudWeightInputs ViewModel="ViewModel" />

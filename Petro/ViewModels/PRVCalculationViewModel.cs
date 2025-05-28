@@ -38,7 +38,7 @@ namespace Petro.ViewModels
             }
         }
 
-        public double? MaxPumpRate
+        public double? FlowRate
         {
             get => _parameters.FlowRate;
             set
