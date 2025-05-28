@@ -71,18 +71,18 @@
 
 .btn-add {
     color: var(--text-primary);
-    background-color: white;
-    border: 1px solid var(--bg-white);
-    border-radius: 4px;
+    background-color: var(--bg-white);
+    border: none;
     cursor: pointer;
     margin-bottom: 10px;
-    font-weight: 400;
+    font-weight: 500;
+    padding: 0;
+    transition: all 0.2s ease; /* Smooth transition for hover effects */
 }
 
     .btn-add:hover {
-        border: 1px solid var(--brd-dark);
-        border-radius: 4px;
-        background-color: var(--hover-gray);
+        color: var(--primary); /* Change text color to primary like radio button */
+        font-weight: 500; /* Make text bold */
     }
 
 /* Remove spinner buttons from number inputs */

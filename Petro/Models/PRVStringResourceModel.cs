@@ -25,7 +25,7 @@
             public string PrvSetting { get; set; } = "PRV Setting (Set Point)";
             public string MaxHydrostaticBackpressure { get; set; } = "Max Hydrostatic Backpressure (P2)";
             public string CalculateButton { get; set; } = "Calculate";
-            public string AddMudWeight { get; set; } = "+ Add Mud Weight";
+            public string AddMudWeight { get; set; } = "Add Mud Weight";
             public string AdvancedOptions { get; set; } = "Advanced Options";
             public string CalculationMode { get; set; } = "Calculation Mode";
             public string SingleScenarioTitle { get; set; } = "Single Scenario Calculation";
