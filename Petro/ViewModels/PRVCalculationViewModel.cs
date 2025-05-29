@@ -48,6 +48,26 @@ namespace Petro.ViewModels
             }
         }
 
+        public double? MinFlowRate
+        {
+            get => _parameters.MinFlowRate;
+            set
+            {
+                _parameters.MinFlowRate = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double? MaxFlowRate
+        {
+            get => _parameters.MaxFlowRate;
+            set
+            {
+                _parameters.MaxFlowRate = value;
+                OnPropertyChanged();
+            }
+        }
+
         public List<double?> MudWeights
         {
             get => _parameters.MudWeights;

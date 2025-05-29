@@ -18,18 +18,37 @@
                         <div class="mb-4">
                             <label for="availableArea" class="modern-label">@ViewModel.StringResources.InputParameters.AvailableArea</label>
                             <input type="number"
-                                   class="modern-input @(ViewModel.AvailableArea == 0 ? "default-value" : "")"
-                                   id="availableArea"
-                                   @bind="ViewModel.AvailableArea" />
+                            class="modern-input @(ViewModel.AvailableArea == 0 ? "default-value" : "")"
+                            id="availableArea"
+                            @bind="ViewModel.AvailableArea" />
                         </div>
 
-                        <div class="mb-4">
-                            <label for="flowRate" class="modern-label">@ViewModel.StringResources.InputParameters.FlowRate<span class="required-field">*</span></label>
-                            <input type="number"
-                                   class="modern-input @(ViewModel.FlowRate == 0 ? "default-value" : "")"
-                                   id="flowRate"
-                                   @bind="ViewModel.FlowRate" />
-                        </div>
+                        @if (ViewModel.CalculationMode == "single")
+                        {
+                            <div class="mb-4">
+                                <label for="flowRate" class="modern-label">@ViewModel.StringResources.InputParameters.FlowRate<span class="required-field">*</span></label>
+                                <input type="number"
+                                class="modern-input @(ViewModel.FlowRate == 0 ? "default-value" : "")"
+                                id="flowRate"
+                                @bind="ViewModel.FlowRate" />
+                            </div>
+                        } else
+                        {
+                            <div class="mb-4">
+                                <label for="minFlowRate" class="modern-label">@ViewModel.StringResources.InputParameters.MinFlowRate<span class="required-field">*</span></label>
+                                <input type="number"
+                                       class="modern-input @(ViewModel.MinFlowRate == 0 ? "default-value" : "")"
+                                       id="minFlowRate"
+                                       @bind="ViewModel.MinFlowRate" />
+                            </div>
+                            <div class="mb-4">
+                                <label for="maxFlowRate" class="modern-label">@ViewModel.StringResources.InputParameters.MaxFlowRate<span class="required-field">*</span></label>
+                                <input type="number"
+                                       class="modern-input @(ViewModel.MaxFlowRate == 0 ? "default-value" : "")"
+                                       id="maxFlowRate"
+                                       @bind="ViewModel.MaxFlowRate" />
+                            </div>
+                        }
 
                         <MudWeightInputs ViewModel="ViewModel" />
 

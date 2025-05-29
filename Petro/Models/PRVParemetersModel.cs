@@ -5,6 +5,8 @@
         // Input values
         public double? AvailableArea { get; set; }
         public double? FlowRate { get; set; }
+        public double? MinFlowRate { get; set; }
+        public double? MaxFlowRate { get; set; }
         public List<double?> MudWeights { get; set; } = new List<double?> { null };
         public double CapacityCorrectionFactor { get; set; } = 1.0; // Kw factor by default
         public double CoefficientOfDischarge { get; set; } = 0.65; // Kd - default

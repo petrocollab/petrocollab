@@ -14,7 +14,7 @@
                 return (false, 0, 0, "At least one Mud Weight must be provided.", r);
             // Validation
             if (parameters.FlowRate <= 0)
-                return (false, 0, 0, "Max Pump Rate must be greater than zero.", r);
+                return (false, 0, 0, "Flow Rate must be greater than zero.", r);
 
             if (parameters.MudWeights[0] <= 0)
                 return (false, 0, 0, "Mud Weight must be greater than zero.", r);
@@ -27,8 +27,6 @@
 
             if (parameters.CombinationCorrectionFactor <= 0)
                 return (false, 0, 0, "Combination Correction Factor must be greater than zero.", r);
-
-
 
             if (parameters.AbsoluteViscosity.HasValue && parameters.AbsoluteViscosity > 0 &&
                 parameters.AvailableArea.HasValue && parameters.AvailableArea > 0)

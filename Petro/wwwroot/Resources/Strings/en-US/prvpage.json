@@ -3,6 +3,8 @@
   "InputParameters": {
     "Title": "Input Parameters",
     "FlowRate": "Flow rate (gpm)",
+    "MinFlowRate": "Min Flow Rate (gpm)",
+    "MaxFlowRate": "Max Flow Rate (gpm)",
     "MudWeight": "Mud Weight (sg)",
     "AvailableArea": "Available Discharge Area (in²)",
     "CapacityCorrectionFactor": "Capacity Correction Factor (Kw)",

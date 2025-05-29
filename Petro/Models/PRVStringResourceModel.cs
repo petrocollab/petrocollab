@@ -14,6 +14,8 @@
         {
             public string Title { get; set; } = "Input Parameters";
             public string FlowRate { get; set; } = "Flow Rate (gpm)";
+            public string MinFlowRate { get; set; } = "Min Flow Rate (gpm)";
+            public string MaxFlowRate { get; set; } = "Max Flow Rate (gpm)";
             public string MudWeight { get; set; } = "Mud Weight (sg)";
             public string AvailableArea { get; set; } = "Available Discharge Area (in²)";
             public string CapacityCorrectionFactor { get; set; } = "Capacity Correction Factor (Kw)";
