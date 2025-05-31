@@ -117,6 +117,13 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
+/* Button group container */
+.button-group {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
 /* Button styling */
 .btn-calculate {
     display: block;
@@ -129,7 +136,9 @@ input[type=number] {
     border-radius: 4px; /* Same rounded borders */
     transition: all 0.2s ease;
     cursor: pointer;
-    margin-top: 20px;
+    padding: 4px 12px; /* Normal padding for text button */
+    min-width: auto; /* Auto width for text */
+    height: auto;
 }
 
     .btn-calculate:hover {
@@ -152,39 +161,46 @@ input[type=number] {
         opacity: 0.65;
     }
 
+
+/* Clear icon styling using CSS background */
+.btn-clear.icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-x-lg' viewBox='0 0 16 16'%3E%3Cpath d='M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: var(--bg-gray);
+    border: 1px solid var(--brd-dark);
+    padding: 4px 0;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 28px;
+    transition: all 0.2s ease;
+}
+
+    .btn-clear.icon:hover {
+        color: var(--status-error-main);
+        border-color: var(--status-error-border);
+        background-color: var(--status-error-background);
+    }
+
 .btn-clear.confirm-reset {
+    margin-left: 15px;
     color: var(--status-warning-main);
-    border-color: var(--status-warning-border);
+    border-color: var(--status-red);
     background-color: var(--status-warning-background);
     padding: 4px 12px; /* Normal padding for text button */
     min-width: auto; /* Auto width for text */
+    transition: all 0.2s ease;
 }
 
     .btn-clear.confirm-reset:hover {
         color: white;
         background-color: var(--status-warning-main);
         border-color: var(--status-warning-main);
-    }
-
-/* Clear icon styling using CSS background */
-.btn-clear-icon {
-    width: 16px;
-    height: 16px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-x-lg' viewBox='0 0 16 16'%3E%3Cpath d='M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-
-/* Button group container */
-.button-group {
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-}
-
-    .button-group .btn-calculate {
-        margin-top: 0; /* Remove individual margin */
     }
 
 /* Alert styles with icons */

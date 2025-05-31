@@ -197,7 +197,7 @@
                         @ViewModel.StringResources.InputParameters.CalculateButton
                     </button>
 
-                    <button class="btn-clear @(ViewModel.CurrentClearButtonState == ClearButtonState.ConfirmReset ? "confirm-reset" : "")"
+                    <button class="btn-clear @(ViewModel.CurrentClearButtonState == ClearButtonState.ConfirmReset ? "confirm-reset" : "icon")"
                             @onclick="ViewModel.HandleClearButtonClick">
                         @if (ViewModel.ShowClearIcon)
                         {
