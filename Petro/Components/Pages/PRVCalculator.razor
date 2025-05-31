@@ -8,12 +8,14 @@
     <h3>@ViewModel.StringResources.PageTitle</h3>
 
     <div class="top-row">
+        <!-- First Column: Inputs & Settings -->
         <div class="column">
             <!-- Input Parameters -->
             <h4>@ViewModel.StringResources.InputParameters.Title</h4>
+            <!--Placeholder for Demo button-->
             <div class="input-row">
                 <div class="column">
-                    <!--First Column-->
+                    <!--Inputs first column-->
                     <div class="card-body">
                         <div class="mb-4">
                             <label for="availableArea" class="modern-label">@ViewModel.StringResources.InputParameters.AvailableArea</label>
@@ -59,18 +61,10 @@
                                    id="prvSetting"
                                    @bind="ViewModel.PrvSetting" />
                         </div>
-
-                       
-                        <div class="mb-4">
-                            <button class="btn-calculate"
-                                    @onclick="ViewModel.CalculateRequiredArea">
-                                @ViewModel.StringResources.InputParameters.CalculateButton
-                            </button>
-                        </div>
                     </div>
                 </div>
                 <div class="column">
-                    <!--Second Column-->
+                    <!--Inputs second column-->
                     <div class="card-body">
                         <div class="mb-4">
                             <label for="capacityCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CapacityCorrectionFactor<span class="required-field">*</span></label>
@@ -80,7 +74,6 @@
                                    @bind="ViewModel.CapacityCorrectionFactor"
                                    placeholder="0" />
                         </div>
-
                         <div class="mb-4">
                             <label for="coefficientOfDischarge" class="modern-label">@ViewModel.StringResources.InputParameters.CoefficientOfDischarge<span class="required-field">*</span></label>
                             <input type="number"
@@ -89,7 +82,6 @@
                                    @bind="ViewModel.CoefficientOfDischarge"
                                    placeholder="0" />
                         </div>
-
                         <div class="mb-4">
                             <label for="combinationCorrectionFactor" class="modern-label">@ViewModel.StringResources.InputParameters.CombinationCorrectionFactor<span class="required-field">*</span></label>
                             <input type="number"
@@ -124,7 +116,6 @@
                     <h4>@ViewModel.StringResources.InputParameters.AdvancedOptions</h4>
                     <div class="settings-row">
                         <!-- Settings: First Column -->
-
                         <div class="settings-column">
                             <h5>@ViewModel.StringResources.InputParameters.CalculationMode</h5>
 
@@ -158,7 +149,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <!-- Settings: Second Column -->
                         <div class="settings-column">
                             <h5>@ViewModel.StringResources.InputParameters.PRVCertReqTitle</h5>
@@ -196,11 +186,32 @@
             </div>
 
         </div>
-
-        <!-- Results -->
+        <!-- Second Column: Buttons & Results -->
         <br />
         <div class="column">
             <div class="card">
+                <!-- Buttons -->
+                <div class="button-group">
+                    <button class="btn-calculate"
+                            @onclick="ViewModel.CalculateRequiredArea">
+                        @ViewModel.StringResources.InputParameters.CalculateButton
+                    </button>
+
+                    <button class="btn-clear @(ViewModel.CurrentClearButtonState == ClearButtonState.ConfirmReset ? "confirm-reset" : "")"
+                            @onclick="ViewModel.HandleClearButtonClick">
+                        @if (ViewModel.ShowClearIcon)
+                        {
+                            <div class="btn-clear-icon"></div>
+                        }
+                        @if (ViewModel.ShowClearText)
+                        {
+                            @ViewModel.ClearButtonText
+                        }
+                    </button>
+                </div>
+
+
+                <!-- Results -->
                 <h4>@ViewModel.StringResources.Results.Title</h4>
                 <div class="card-body">
                     @if (ViewModel.CalculationPerformed)
@@ -245,11 +256,10 @@
                 </div>
             </div>
         </div>
-
-        <!-- Bottom section with formula spanning full width -->
     </div>
+
+    <!-- Formula Display -->
     <div class="bottom-section">
-        <!-- Formula Display -->
         <div class="formula-container text-center my-4">
             <div style="font-size: 1.5rem;">
                 @((MarkupString)ViewModel.StringResources.Formula.FormulaLatex)
@@ -287,43 +297,7 @@
     {
         if (firstRender)
         {
-            await JSRuntime.InvokeVoidAsync("eval", @"
-            if (typeof window.MathJax === 'undefined') {
-                // MathJax config
-                window.MathJax = {
-                    tex: {
-                        inlineMath: [['$', '$']],
-                        displayMath: [['\\\\[', '\\\\]']]
-                    },
-                    svg: {
-                        fontCache: 'global'
-                    }
-                };
-
-                // Load MathJax
-                var script = document.createElement('script');
-                script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
-                script.id = 'MathJax-script';
-                script.async = true;
-
-                script.onload = function() {
-                    MathJax.typeset();
-                };
-
-                document.head.appendChild(script);
-            } else {
-                MathJax.typeset();
-            }
-        ");
-
-            // Code to match button width to inputs
-            await JSRuntime.InvokeVoidAsync("eval", @"
-            // Wait a brief moment to ensure DOM is fully rendered
-            setTimeout(function() {
-                const inputWidth = document.querySelector('.modern-input').offsetWidth;
-                document.querySelector('.btn-calculate').style.width = inputWidth + 'px';
-            }, 100);
-        ");
+            await JSRuntime.InvokeVoidAsync("eval", "if (typeof MathJax !== 'undefined') { MathJax.typeset(); }");
         }
     }
 }

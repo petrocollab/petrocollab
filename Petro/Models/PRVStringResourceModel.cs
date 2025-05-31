@@ -22,11 +22,11 @@
             public string CoefficientOfDischarge { get; set; } = "Coefficient of Discharge (Kd)";
             public string ViscosityCorrectionFactor { get; set; } = "Viscosity Correction Factor (Kv)";
             public string CombinationCorrectionFactor { get; set; } = "Combination Correction Factor (Kc)";
-
             public string AbsoluteViscosity { get; set; } = "Absolute viscosity (µ)";
             public string PrvSetting { get; set; } = "PRV Setting (Set Point)";
             public string MaxHydrostaticBackpressure { get; set; } = "Max Hydrostatic Backpressure (P2)";
             public string CalculateButton { get; set; } = "Calculate";
+            public string ConfirmResetButton { get; set; } = "Confirm Reset";
             public string AddMudWeight { get; set; } = "Add Mud Weight";
             public string AdvancedOptions { get; set; } = "Advanced Options";
             public string CalculationMode { get; set; } = "Calculation Mode";

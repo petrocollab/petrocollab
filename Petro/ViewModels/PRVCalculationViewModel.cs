@@ -5,6 +5,12 @@ using Petro.Models;
 
 namespace Petro.ViewModels
 {
+    public enum ClearButtonState
+    {
+        Clear,
+        ConfirmReset
+    }
+
     public class PRVCalculationViewModel
     {
         private readonly PRVCalculationService _calculationService;
@@ -180,6 +186,83 @@ namespace Petro.ViewModels
 
                     OnPropertyChanged();
                 }
+            }
+        }
+
+        // Button state management
+        
+
+        private ClearButtonState _clearButtonState = ClearButtonState.Clear;
+        public ClearButtonState CurrentClearButtonState
+        {
+            get => _clearButtonState;
+            private set
+            {
+                _clearButtonState = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(ClearButtonText));
+                OnPropertyChanged(nameof(ShowClearIcon));
+                OnPropertyChanged(nameof(ShowClearText));
+            }
+        }
+
+        public string ClearButtonText => CurrentClearButtonState == ClearButtonState.Clear ? "" : StringResources.InputParameters.ConfirmResetButton;
+        public bool ShowClearIcon => CurrentClearButtonState == ClearButtonState.Clear;
+        public bool ShowClearText => CurrentClearButtonState == ClearButtonState.ConfirmReset;
+
+        public void HandleClearButtonClick()
+        {
+            switch (CurrentClearButtonState)
+            {
+                case ClearButtonState.Clear:
+                    CurrentClearButtonState = ClearButtonState.ConfirmReset;
+                    break;
+                case ClearButtonState.ConfirmReset:
+                    ClearAllData();
+                    CurrentClearButtonState = ClearButtonState.Clear;
+                    break;
+            }
+        }
+
+        private void ClearAllData()
+        {
+            // Reset input parameters (but NOT the correction factors)
+            AvailableArea = null;
+            FlowRate = null;
+            MinFlowRate = null;
+            MaxFlowRate = null;
+            PrvSetting = null;
+            MaxHydrostaticBackpressure = null;
+            AbsoluteViscosity = null;
+
+            // Reset mud weights to single null entry
+            _parameters.MudWeights.Clear();
+            _parameters.MudWeights.Add(null);
+            OnPropertyChanged(nameof(MudWeights));
+
+            // Clear calculation results
+            RequiredArea = 0;
+            CalculationPerformed = false;
+            HasError = false;
+            ErrorMessage = string.Empty;
+            AreaComparisonMessage = string.Empty;
+            Reynolds = string.Empty;
+
+            // Notify UI of all changes
+            OnPropertyChanged(nameof(RequiredArea));
+            OnPropertyChanged(nameof(CalculationPerformed));
+            OnPropertyChanged(nameof(HasError));
+            OnPropertyChanged(nameof(ErrorMessage));
+            OnPropertyChanged(nameof(AreaComparisonMessage));
+            OnPropertyChanged(nameof(HasAreaComparison));
+            OnPropertyChanged(nameof(Reynolds));
+        }
+
+        public void CancelClearConfirmation()
+        {
+            if (CurrentClearButtonState == ClearButtonState.ConfirmReset)
+            {
+                CurrentClearButtonState = ClearButtonState.Clear;
             }
         }
 

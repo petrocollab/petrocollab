@@ -15,6 +15,7 @@
     "PrvSetting": "PRV Setting (Set Point)",
     "MaxHydrostaticBackpressure": "Max Hydrostatic Backpressure (psi)",
     "CalculateButton": "Calculate",
+    "ConfirmResetButton": "Confirm Reset",
     "AddMudWeight": "Add Mud Weight",
     "AdvancedOptions": "Advanced Options",
     "CalculationMode": "Calculation Mode",
